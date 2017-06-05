@@ -103,7 +103,7 @@ def iterateRecursion2(text: String, count: Int, cur: Int = 1): Unit ={
     iterateRecursion2(text, count, index)
   }
 }
-iterateRecursion2("h",6)
+iterateRecursion2("he",6)
 
 //method recursion 3
 def fizzBuzzRecursion(first: String, second: String, count: Int, cur: Int = 1): Unit = {
