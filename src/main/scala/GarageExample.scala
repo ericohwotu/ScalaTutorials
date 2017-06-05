@@ -12,11 +12,17 @@ abstract class Vehicle{
 }
 object GarageExample {
 
-  case class Employee(name: String) extends Person
-  case class Customer(name: String) extends Person
-  case class Car(name: String) extends Vehicle
-  case class Bike(name: String) extends Vehicle
 
+
+  def main(args: Array[String]): Unit{
+    var me =  case class Employee(name: String) extends Person {def toString() = s"name $name"}
+    case class Customer(name: String) extends Person {def toString() = s"name $name"}
+    case class Car(name: String) extends Vehicle {def toString() = s"name $name"}
+    case class Bike(name: String) extends Vehicle {def toString() = s"name $name"}
+
+    var employee = Employee("Eric")
+    var str = employee.toString()
+  }
 
 }
 
