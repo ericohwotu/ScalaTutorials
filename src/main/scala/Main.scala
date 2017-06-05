@@ -3,31 +3,23 @@
   */
 object Main {
   def main(args: Array[String]): Unit = {
-    println("hello world")
+    println("Hello World")
 
     //define new class
     case class Person(name: String, age: Int)
-    val person = Person("Eric", 25)
-    var name = person.name;
-    var age = person.age;
+    val person = Person("Eric", (Math.floor(Math.random()*30)+1).toInt)
+    val name = person.name
+    val age = person.age
 
     //print out the data
-    var result = isLegal(age)
+    val result = isLegal(age)
     println(s"Name: $name Age: $age")
     println(s"$name's ability to drink is $result")
 
-    //create new child
-    val child = Person("John", 12)
-    name = child.name;
-    age = child.age;
-
-    result = isLegal(age)
-    println(s"Name: $name Age: $age")
-    println(s"$name's ability to drink is $result")
   }
 
   def isLegal(age: Int): Boolean = {
-      if (age>= 25){
+      if (age>= 18){
         true
       }else{
         false
