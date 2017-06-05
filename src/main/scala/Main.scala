@@ -11,11 +11,17 @@ object Main {
     val name = person.name
     val age = person.age
 
-    //print out the data
     val result = isLegal(age)
     println(s"Name: $name Age: $age")
     println(s"$name's ability to drink is $result")
 
+    //new function returns
+    def fn : Int => String = (x) => s"return message = $x"
+    def fn2 : (Int, String) => String = (x,s) => s"name: $s and age: $x"
+
+    val ns = fn(12)
+    val ns2 = fn2((Math.floor(Math.random()*30)+1).toInt,"Eric")
+    println(s"new checklist $ns / ($ns2)")
   }
 
   def isLegal(age: Int): Boolean = {
