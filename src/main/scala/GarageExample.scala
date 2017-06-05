@@ -14,7 +14,6 @@ object GarageExample {
 
   case class Employee(name: String) extends Person
   case class Customer(name: String) extends Person
-
   case class Car(name: String) extends Vehicle
   case class Bike(name: String) extends Vehicle
 
