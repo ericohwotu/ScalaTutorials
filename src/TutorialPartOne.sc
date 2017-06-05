@@ -28,7 +28,7 @@ def trimString(term: String, index: Int): String = term.substring(term.length()-
 val trimmedString = trimString("hello",3)
 
 //strings 2
-def joinString(a: String, b: String, c: Char, d: Char): String = a.concat(b+c+d)
+def joinString(a: String, b: String, c: Char, d: Char): String = a.concat(b).replace(c,d)
 val jointString= joinString("hel", "lo ", 'm', 'e')
 
 //operators
