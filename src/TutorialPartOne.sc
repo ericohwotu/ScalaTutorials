@@ -143,9 +143,9 @@ def calculateMatch3(a: Int, b: Int, opt: Boolean): Int = {
     case _=> b match {
       case 0=> a
       case _=> calculateMatch(a, b, opt)
-      }
     }
   }
+}
 
 val calculatedMatch1 = calculateMatch3(12,0,true)
 val calculatedMatch2 = calculateMatch3(0,2,false)
