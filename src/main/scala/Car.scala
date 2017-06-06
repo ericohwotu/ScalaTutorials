@@ -4,7 +4,7 @@
 case class Car(id: Int, vehicleType: VehicleType.Value = VehicleType.CAR) extends Vehicle {
   addParts()
   override def toString() = {
-    println("parts length "+ parts.length)
+    //println("parts length "+ parts.length)
     var partsInfo: String = ""
     for (i <- parts) {
       partsInfo += i.toString()
@@ -14,7 +14,7 @@ case class Car(id: Int, vehicleType: VehicleType.Value = VehicleType.CAR) extend
 
   def addParts(): Unit = {
     for (i <- 1 to (Math.floor(Math.random() * 10).toInt) + 10) {
-      parts += new Part(i, Math.random() * 50 + 5, if (Math.random() > 0.6) {
+      parts += new Part(i, Math.random() * 45 + 5, if (Math.random() > 0.6) {
         false
       } else {
         true

@@ -3,7 +3,7 @@ import java.util.TimeZone.getAvailableIDs
 
 //function 1
 //val g = getAvailableIDs.filter(_.contains("/")).map(value => value.split("/")(1)).grouped(10).toArray.flatten.take(20)
-val g = getAvailableIDs.filter(_.contains("/")).map(value => value.split("/")(1)).take(20)
+val g = getAvailableIDs.filter(_.contains("/")).map(value => value.split("/")(1)).grouped(10).take(20)
 
 //Black Jack
 def playBlackJack(a: Int, b: Int): Int = {

@@ -14,7 +14,7 @@ object GarageExample {
     println(car1.toString())
 
     //add vehicles to the garage
-    var addPercentage = 0.0
+    var addPercentage = 0.0 // percentage to see whether are car or a bike should be added
 
     for(i<- 1 to Math.floor(Math.random()*10).toInt+10){
       addPercentage =  Math.random()
@@ -23,8 +23,21 @@ object GarageExample {
         case _ => Garage.addVehicle(new Car(i))
       }
     }
-    println(Garage.fixVehicles())
+
+    //adding employees
+    Garage.addEmployee(new Employee(1,"Eric"))
+    Garage.addEmployee(new Employee(2,"Eric"))
+    Garage.addEmployee(new Employee(3,"Eric"))
+    Garage.addEmployee(new Employee(4,"Eric"))
+    Garage.addEmployee(new Employee(5,"Eric"))
+    Garage.addEmployee(new Employee(6,"Eric"))
+    Garage.addEmployee(new Employee(7,"Eric"))
+    Garage.addEmployee(new Employee(8,"Eric"))
     println(Garage.displayInventory())
+
+
+    Garage.open()
+    //println(Garage.displayInventory())
   }
 
 }
