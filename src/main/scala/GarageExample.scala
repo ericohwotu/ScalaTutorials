@@ -26,13 +26,13 @@ object GarageExample {
 
     //adding employees
     Garage.addEmployee(new Employee(1,"Eric"))
-    Garage.addEmployee(new Employee(2,"Eric"))
-    Garage.addEmployee(new Employee(3,"Eric"))
-    Garage.addEmployee(new Employee(4,"Eric"))
-    Garage.addEmployee(new Employee(5,"Eric"))
-    Garage.addEmployee(new Employee(6,"Eric"))
-    Garage.addEmployee(new Employee(7,"Eric"))
-    Garage.addEmployee(new Employee(8,"Eric"))
+    Garage.addEmployee(new Employee(2,"John"))
+    Garage.addEmployee(new Employee(3,"Julia"))
+    Garage.addEmployee(new Employee(4,"Juliet"))
+    Garage.addEmployee(new Employee(5,"Ramon"))
+    Garage.addEmployee(new Employee(6,"Chris"))
+    Garage.addEmployee(new Employee(7,"Jack"))
+    Garage.addEmployee(new Employee(8,"Mark"))
     println(Garage.displayInventory())
 
 

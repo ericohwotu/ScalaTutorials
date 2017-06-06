@@ -3,6 +3,8 @@
   */
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import java.util._
+
 object Garage {
   var vehicles: scala.collection.mutable.ListBuffer[Vehicle] = scala.collection.mutable.ListBuffer()
   var fixedVehicles: scala.collection.mutable.ListBuffer[Vehicle] = scala.collection.mutable.ListBuffer()
@@ -18,10 +20,15 @@ object Garage {
 
     while(!vehicles.isEmpty){
       if(!employees.isEmpty){
-        Future{fixVehicle(vehicles.head, employees.head)}
+        var e = employees.head
+        employees -= employees.head
+        Future{fixVehicle(vehicles.head, e)}
       }
+      Thread.sleep(100) //allow for time to update
     }
+    Thread.sleep(10000) // ensure all are finished before ending loop
   }
+
 
   def addVehicle(vehicle: Vehicle): Unit = vehicles += vehicle
 
@@ -37,9 +44,9 @@ object Garage {
   def registerEmployee(employee: Employee): Unit = employees += employee //vehicles.filter(x => (x.id == id)||(x.vehicleType == vehicleType))
 
   def fixVehicle(vehicle: Vehicle, employee: Employee): String = {
-    println(System.currentTimeMillis() + " >>> " +employee.toString() + "is working on" + vehicle.toString())
+    val now = Calendar.getInstance()
+    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) + " >>> " +employee.name + " is working on" + vehicle.id)
     //remove the employee from the list and remove the vehicle from the vehicles list
-    employees -= employees.head
     vehicles -= vehicles.head
 
     //calculate the total time
@@ -49,10 +56,12 @@ object Garage {
         totalTime += part.fixTime
       }
     }
-    Thread.sleep(totalTime*10)
+    Thread.sleep(totalTime*100)
 
     fixedVehicles += vehicle
     employees += employee
+
+    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> " +employee.name + " has finished working on working on" + vehicle.id)
     "TODO: Implement"
   }
 
