@@ -1,4 +1,4 @@
-package Intermediate
+//package Intermediate
 
 /**
   * Created by Administrator on 05/06/2017.
@@ -11,9 +11,6 @@ object GarageExample {
     var employee = Employee(1, "Eric")
     var str = employee.toString()
 
-    var car1 = new Bike(1)
-    car1.addParts()
-    println(car1.toString())
 
     //add vehicles to the garage
     var addPercentage = 0.0 // percentage to see whether are car or a bike should be added
@@ -35,7 +32,7 @@ object GarageExample {
     Garage.addEmployee(new Employee(6,"Chris"))
     Garage.addEmployee(new Employee(7,"Jack"))
     Garage.addEmployee(new Employee(8,"Mark"))
-    println(Garage.displayInventory())
+    //println(Garage.displayInventory())
 
 
     Garage.open()

@@ -1,4 +1,4 @@
-package Intermediate
+//package Intermediate
 
 /**
   * Created by Administrator on 06/06/2017.
@@ -14,14 +14,14 @@ case class Car(id: Int, vehicleType: VehicleType.Value = VehicleType.CAR) extend
     s"ID: $id \nType: $vehicleType \nParts: ($partsInfo)"
   }
 
-  def addParts(): Unit = {
-    for (i <- 1 to (Math.floor(Math.random() * 10).toInt) + 10) {
-      parts += new Part(i, Math.random() * 45 + 5, if (Math.random() > 0.6) {
-        false
-      } else {
-        true
-      },
-        (Math.random()*5).toInt+1)
-    }
-  }
+  // def addParts(): Unit = {
+  //   for (i <- 1 to (Math.floor(Math.random() * 10).toInt) + 10) {
+  //     parts += new Part(i, Math.random() * 45 + 5, if (Math.random() > 0.6) {
+  //       false
+  //     } else {
+  //       true
+  //     },
+  //       (Math.random()*5).toInt+1)
+  //   }
+  // }
 }

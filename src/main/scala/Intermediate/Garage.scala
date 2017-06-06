@@ -1,4 +1,4 @@
-package Intermediate
+//package Intermediate
 
 /**
   * Created by Administrator on 06/06/2017.
@@ -84,26 +84,33 @@ object Garage {
     val startMinute = now.get(Calendar.MINUTE)
     val startSecond = now.get(Calendar.SECOND)
 
-    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) + " >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) + " >>> " +employee.name + " is working on " + vehicle.vehicleType + " " + vehicle.id)
 
     //remove the vehicle from the vehicles list
     vehicles -= vehicles.head
-
+    
     //calculate the total time
     var totalTime = 0
     var totalCost = 0.0
     var total =0
     for (part <- vehicle.parts) {
+      
       part.broken match{
         case _ if (part.broken) => {
           totalTime += part.fixTime //get the total time to complete the work
           totalCost += part.cost //get the total cost of the parts
           total += 1
         }
+        case _ => {
+          totalTime += 0 //get the total time to complete the work
+          totalCost += 0 //get the total cost of the parts
+          total += 0
+        }
       }
     }
-    Thread.sleep(totalTime*1000)
-
+    
+    Thread.sleep(totalTime * 1000)
+  
     fixedVehicles += vehicle //add the fixed vehicles to the new list
     employees += employee
 
@@ -128,10 +135,11 @@ object Garage {
           for (part <- v.parts) {
             part.broken match {
               case true => totalCost += part.cost
-              case _ => totalCost += 0
+              case _ => totalCost += 0.0
             }
           }
         }
+        case _ => 0.0
       }
     }
     //println(f"Total: $totalCost%2.2f")
