@@ -1,0 +1,69 @@
+There are currently 11 vehicles in the garage and 8 employees working today
+
+Vehicle Record: 
+ID: 7 
+Type: CAR
+Assigned Employee: Jack
+Cost: £156.21
+Fix Time: 17 minutes
+Vehicle Record: 
+ID: 8 
+Type: CAR
+Assigned Employee: Mark
+Cost: £170.90
+Fix Time: 18 minutes
+Vehicle Record: 
+ID: 1 
+Type: CAR
+Assigned Employee: Eric
+Cost: £197.97
+Fix Time: 23 minutes
+Vehicle Record: 
+ID: 3 
+Type: BIKE
+Assigned Employee: Julia
+Cost: £242.72
+Fix Time: 25 minutes
+Vehicle Record: 
+ID: 4 
+Type: CAR
+Assigned Employee: Juliet
+Cost: £175.94
+Fix Time: 25 minutes
+Vehicle Record: 
+ID: 2 
+Type: CAR
+Assigned Employee: John
+Cost: £204.14
+Fix Time: 26 minutes
+Vehicle Record: 
+ID: 5 
+Type: BIKE
+Assigned Employee: Ramon
+Cost: £165.21
+Fix Time: 26 minutes
+Vehicle Record: 
+ID: 6 
+Type: CAR
+Assigned Employee: Chris
+Cost: £184.70
+Fix Time: 27 minutes
+Vehicle Record: 
+ID: 11 
+Type: CAR
+Assigned Employee: Eric
+Cost: £161.92
+Fix Time: 17 minutes
+Vehicle Record: 
+ID: 9 
+Type: CAR
+Assigned Employee: Jack
+Cost: £237.47
+Fix Time: 27 minutes
+Vehicle Record: 
+ID: 10 
+Type: CAR
+Assigned Employee: Mark
+Cost: £349.45
+Fix Time: 37 minutesTotal Earned: 2246.64 
+END

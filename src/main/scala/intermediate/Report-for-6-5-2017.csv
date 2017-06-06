@@ -1,0 +1,14 @@
+Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Start Time,End Time,Fix Time,Cost
+7,CAR,7,7,Jack,17 s,9:31:29,9:31:46,£156.21
+8,CAR,7,8,Mark,18 s,9:31:29,9:31:47,£170.90
+1,CAR,9,1,Eric,23 s,9:31:28,9:31:51,£197.97
+3,BIKE,10,3,Julia,25 s,9:31:28,9:31:53,£242.72
+4,CAR,7,4,Juliet,25 s,9:31:28,9:31:53,£175.94
+2,CAR,8,2,John,26 s,9:31:28,9:31:54,£204.14
+5,BIKE,8,5,Ramon,26 s,9:31:29,9:31:55,£165.21
+6,CAR,9,6,Chris,27 s,9:31:29,9:31:56,£184.70
+11,CAR,7,1,Eric,17 s,9:31:51,9:32:8,£161.92
+9,CAR,9,7,Jack,27 s,9:31:46,9:32:13,£237.47
+10,CAR,12,8,Mark,37 s,9:31:47,9:32:24,£349.45
+
+Vehicles,11,Employees,8,Total Earned,2246.64
