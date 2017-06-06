@@ -31,20 +31,27 @@ object Garage {
   def open(): Unit = {
     opened = true
     implicit val ec = ExecutionContext.fromExecutorService(Executors.newWorkStealingPool(employees.length)) // set the amount of working pools to the amount of employees
+
+    //begin writing the first lines tot he files
     printWriter.write(s"There are currently ${vehicles.length} vehicles in the garage and ${employees.length} employees working today\n")
-    csvWriter.write("Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Fix Time,Cost")
+    csvWriter.write("Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Start Time,End Time,Fix Time,Cost")
 
     val totalEarned = calculateBills()
     val totalVehicles = vehicles.length
     val totalEmployees = employees.length
 
     while(!vehicles.isEmpty || employeesWorking!=0){
-      if(!employees.isEmpty){
-        //select the first employee and remove them from the list
-        val e = employees.head
-        employees -= employees.head
-        //schedule the fix vehicle routine with current employee
-        Future{fixVehicle(vehicles.head, e)}
+      employees.isEmpty match {
+        case false => {
+          //select the first employee and remove them from the list
+          val e = employees.head
+          employees -= employees.head
+          //schedule the fix vehicle routine with current employee
+          Future {
+            fixVehicle(vehicles.head, e)
+          }
+        }
+        case true => "do nothing"
       }
       Thread.sleep(100) //allow for time to update
     }
@@ -71,7 +78,12 @@ object Garage {
 
   def fixVehicle(vehicle: Vehicle, employee: Employee): Unit = {
     employeesWorking += 1
+
     var now = Calendar.getInstance()
+    val startHour = now.get(Calendar.HOUR)
+    val startMinute = now.get(Calendar.MINUTE)
+    val startSecond = now.get(Calendar.SECOND)
+
     println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) + " >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
 
     //remove the vehicle from the vehicles list
@@ -82,10 +94,12 @@ object Garage {
     var totalCost = 0.0
     var total =0
     for (part <- vehicle.parts) {
-      if (part.broken) {
-        totalTime += part.fixTime //get the total time to complete the work
-        totalCost += part.cost //get the total cost of the parts
-        total += 1
+      part.broken match{
+        case _ if (part.broken) => {
+          totalTime += part.fixTime //get the total time to complete the work
+          totalCost += part.cost //get the total cost of the parts
+          total += 1
+        }
       }
     }
     Thread.sleep(totalTime*1000)
@@ -94,22 +108,28 @@ object Garage {
     employees += employee
 
     employeesWorking -= 1 //decrement counter as this employee has finished working
-    now = Calendar.getInstance()
+    val end = Calendar.getInstance()
+    val endHour = end.get(Calendar.HOUR)
+    val endMinute = end.get(Calendar.MINUTE)
+    val endSecond = end.get(Calendar.SECOND)
 
-    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
-    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f" )
+    println(end.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(end.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f" )
     printWriter.write(f"\nVehicle Record: \nID: ${vehicle.id} \nType: ${vehicle.vehicleType}\nAssigned Employee: ${employee.name}\nCost: £${totalCost}%2.2f\nFix Time: ${totalTime} minutes")
-    csvWriter.write(f"\n${vehicle.id},${vehicle.vehicleType},$total,${employee.id},${employee.name},$totalTime minutes,£${totalCost}%2.2f")
+    csvWriter.write(f"\n${vehicle.id},${vehicle.vehicleType},$total,${employee.id},${employee.name},$totalTime s,$startHour:$startMinute:$startSecond,$endHour:$endMinute:$endSecond,£${totalCost}%2.2f")
   }
 
   //for(v <- vehicles)if(v.state == VehicleState.BROKEN)for(v.parts)
   def calculateBills(): Double = {
     var totalCost: Double = 0.0
     for(v <- vehicles) {
-      if (v.broken == true) {
-        for (part <- v.parts) {
-          if (part.broken) {
-            totalCost += part.cost
+      v.broken match {
+        case true => {
+          for (part <- v.parts) {
+            part.broken match {
+              case true => totalCost += part.cost
+              case _ => totalCost += 0
+            }
           }
         }
       }
