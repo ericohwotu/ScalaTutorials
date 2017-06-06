@@ -158,7 +158,7 @@ def swapValues(arr: Any): Any = {
     case Array(x,y) => Array(y,x)
     case (x, y) => (y,x)
     case List(x,y) => List(y,x)
-    case _ => arr
+    case _ => "Not a valid type"
   }
 }
 
