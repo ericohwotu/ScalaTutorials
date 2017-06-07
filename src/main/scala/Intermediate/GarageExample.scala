@@ -1,4 +1,4 @@
-//package Intermediate
+package Intermediate
 
 /**
   * Created by Administrator on 05/06/2017.
@@ -28,10 +28,18 @@ object GarageExample {
     Garage.addEmployee(new Employee(2,"John"))
     Garage.addEmployee(new Employee(3,"Julia"))
     Garage.addEmployee(new Employee(4,"Juliet"))
-    Garage.addEmployee(new Employee(5,"Ramon"))
-    Garage.addEmployee(new Employee(6,"Chris"))
-    Garage.addEmployee(new Employee(7,"Jack"))
-    Garage.addEmployee(new Employee(8,"Mark"))
+//    Garage.addEmployee(new Employee(5,"Ramon"))
+//    Garage.addEmployee(new Employee(6,"Chris"))
+//    Garage.addEmployee(new Employee(7,"Jack"))
+//    Garage.addEmployee(new Employee(8,"Mark"))
+//    Garage.addEmployee(new Employee(9,"Erica"))
+//    Garage.addEmployee(new Employee(10,"Johna"))
+//    Garage.addEmployee(new Employee(11,"Juliaa"))
+//    Garage.addEmployee(new Employee(12,"Julieta"))
+//    Garage.addEmployee(new Employee(13,"Ramona"))
+//    Garage.addEmployee(new Employee(14,"Chrisa"))
+//    Garage.addEmployee(new Employee(15,"Jacka"))
+//    Garage.addEmployee(new Employee(16,"Marka"))
     //println(Garage.displayInventory())
 
 

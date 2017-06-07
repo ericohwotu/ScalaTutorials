@@ -1,4 +1,4 @@
-//package Intermediate
+package Intermediate
 
 /**
   * Created by Administrator on 06/06/2017.
@@ -84,7 +84,7 @@ object Garage {
     val startMinute = now.get(Calendar.MINUTE)
     val startSecond = now.get(Calendar.SECOND)
 
-    println(now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) + " >>> " +employee.name + " is working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(startMinute + ":" + startSecond + " >>> " +employee.name + " is working on " + vehicle.vehicleType + " " + vehicle.id)
 
     //remove the vehicle from the vehicles list
     vehicles -= vehicles.head
@@ -120,8 +120,8 @@ object Garage {
     val endMinute = end.get(Calendar.MINUTE)
     val endSecond = end.get(Calendar.SECOND)
 
-    println(end.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
-    println(end.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND) +" >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f" )
+    println(endMinute + ":" + endSecond +" >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(endMinute + ":" + endSecond +" >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f" )
     printWriter.write(f"\nVehicle Record: \nID: ${vehicle.id} \nType: ${vehicle.vehicleType}\nAssigned Employee: ${employee.name}\nCost: £${totalCost}%2.2f\nFix Time: ${totalTime} minutes")
     csvWriter.write(f"\n${vehicle.id},${vehicle.vehicleType},$total,${employee.id},${employee.name},$totalTime s,$startHour:$startMinute:$startSecond,$endHour:$endMinute:$endSecond,£${totalCost}%2.2f")
   }

@@ -153,15 +153,24 @@ val calculatedMatch3 = calculateMatch3(12,2,true)
 val calculatedMatch4 = calculateMatch3(12,2,false)
 
 // pattern Matching 2
-def swapValues(arr: Any): Any = {
+def swapValues[T](arr: T) = {
   arr match {
     case Array(x,y) => Array(y,x)
-    case (x, y) => (y,x)
+    case arrItem: Array[Int] => Array(arrItem(1),arrItem(0))
+    case (x, y) => Tuple2(y,x)
+    case (x, y,_) => Tuple2(y,x)
+    case (x, y,_,_) => Tuple2(y,x)
+    case (x, y,_,_,_) => Tuple2(y,x)
     case List(x,y) => List(y,x)
+    case x :: y :: _ => List(y,x)
     case _ => "Not a valid type"
   }
 }
 
-swapValues(Array(3,6))
+
+swapValues(Array(3,6,8,9,3,5,3))
 swapValues((4,19))
-swapValues(List(2,5))
+swapValues(List(2,5,7,8,93))
+swapValues((4,19,6))
+
+(1,2,3,4,5).getClass.isInstance((1,2,3,4,5).getClass)
