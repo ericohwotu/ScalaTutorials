@@ -2,6 +2,7 @@ import scala.io.Source
 import scala.collection.mutable.{ListBuffer, HashMap, MultiMap, Set}
 def fileName = "C:\\Users\\Administrator\\IdeaProjects\\ScalaTutorialsSecond\\src\\main\\scala\\Advanced\\Report-for-6.txt"
 def wordsList = "C:\\Users\\Administrator\\IdeaProjects\\ScalaTutorialsSecond\\words-list.txt"
+//def wordsList = "words-list.txt"
 //Hashmaps - anagrams
 //first task
 val readFile = (fName: String) => Source.fromFile(fName).getLines().flatMap(_.split("\\W+")).toArray
@@ -20,6 +21,7 @@ def getAnagrams(keys: Array[String], words: Array[String]): Map[String, ListBuff
 
 //score anagrams
 val scoreAnagrams = (anagrams:Map[String,ListBuffer[String]]) => anagrams.toSeq.sortWith(_._2.size>_._2.size).filter(x => x._2.size >= anagrams.maxBy(_._2.size)._2.size).maxBy(_._1.length)
+
 
 var words = readFile(wordsList)//.foreach(item1 => (tupleList += Tuple2("",item1)))
 var keys =  words.map(x => getOrderedString(x))//.foreach(item => (tupleList += Tuple2(item,"")))
