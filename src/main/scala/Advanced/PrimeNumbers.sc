@@ -7,7 +7,7 @@ import ExecutionContext.Implicits.global
 
 var p: ListBuffer[Int] = ListBuffer(2)
 
-var primeNumbers = {2 to 3000000}.toList.filter(item => {
+var primeNumbers = {2 to 1000000}.toList.filter(item => {
   if(p.forall(item % _ != 0)){
     p += item
     true
