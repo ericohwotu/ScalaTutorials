@@ -18,7 +18,7 @@ object Anagrams{
         for(f<-0 to keys.length-1){
             //check if the key exists
             (map.keySet.contains(keys(f))) match {
-                case true =>  map += (keys(f) -> map(keys(f))+=words(f)) //update the key with the new list
+                case true =>  map += (keys(f) -> (map(keys(f))+=words(f))) //update the key with the new list
                 case _ => map += (keys(f)->ListBuffer(words(f))); //if the key doesn't exist create the new pair
             }
         }
