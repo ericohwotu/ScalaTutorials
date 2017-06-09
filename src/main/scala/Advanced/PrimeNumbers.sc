@@ -7,7 +7,7 @@ import ExecutionContext.Implicits.global
 
 var p: ListBuffer[Int] = ListBuffer(2)
 
-var primeNumbers = {2 to 1000000}.toList.filter(item => {
+var primeNumbers = {2 to 1000}.toList.filter(item => {
   if(p.forall(item % _ != 0)){
     p += item
     true
@@ -16,6 +16,14 @@ var primeNumbers = {2 to 1000000}.toList.filter(item => {
   }
 }).size
 
+
+//var x = {2 to 3000000}
+var l = ListBuffer.fill(3000000)({1 to 3000})
+//for (i<- 1 to 3000000){
+  //l += i
+//}
+//l
+//{2 to 3000000}.toList.filter(item => item < Math.sqrt(3000000))
 ////def isPrime(n: Int) = (2 until n) forall (n % _ != 0)
 //def isPrime(n: Int): Boolean = {
 //  var ans = false

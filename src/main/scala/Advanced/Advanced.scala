@@ -2,26 +2,33 @@ import scala.collection.mutable.{HashMap, ListBuffer, MultiMap, Set}
 
 object Advanced{
 
-    class PipedObject[T] (value:T)
-    {
-        def |>[R] (f : T => R) = f(this.value)
-    }
-    implicit def toPiped[T] (value:T) = new PipedObject[T](value)
-
     def main(args: Array[String]): Unit = {
         var p: ListBuffer[Int] = ListBuffer(2)
         
         val beginning = System.currentTimeMillis()
         println("Beginning prime number calculation")
 
-        var primeNumbers = {2 to 1000000}.toList.filter(item => {if(p.forall(item % _ != 0)){p += item;true} else false }).size + 1
+        val n=10000000
+        var lb: ListBuffer[Boolean] = ListBuffer.fill(n/2)(true)
+        var cur: Int = 3;
 
-        //var primeNumbers = (n: Int) => (2 to n) |> (r => r.foldLeft(r.toSet)((ps, x) => if (ps(x)) ps -- (x * x to n by x) else ps))
+        //val primeNumbers = {3 to n by 2}.toBuffer.filter(item => {if(p.forall(item % _ != 0)){if(item < Math.sqrt(n)){p += item};true} else false }).size + 1
+        val incr: (Int) => Int = (x) => {
+            x match{
+                case b if (x % 2 != 0 ) && (x % 5 != 0) => 4
+                case b if (x % 2 != 0 ) => 2
 
-        //var x = primeNumbers(1000000).size
+            }
+        }
+        val primeNumbers = lb.filter(item => {if(p.forall(cur % _ != 0)){if(cur < Math.sqrt(n)){p += cur};incr(cur);true} else {incr(cur);false} }).size + 1
+
+        //p += 5
+        //  .filter(item => if(item != 5)(item % 5 != 0) else true)
+
 
         val ending = System.currentTimeMillis()
         val elapsedTime = (ending - beginning)/1000
-        println(s"The amount of primes found is $primeNumbers taking $elapsedTime seconds to run")
+        println(s"The amount of primes found is $primeNumbers taking $elapsedTime seconds to run \n$p + count ${p.length}")
+
     }
 }
