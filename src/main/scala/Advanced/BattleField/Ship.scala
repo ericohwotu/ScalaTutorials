@@ -11,17 +11,16 @@ abstract class Ship {
   val len: Int
   val id:Int
 
-  def sink = {
+  def sink(): Unit = {
     destroyed = true
     println(s"The enemy's $shipType has been destroyed")
   }
 
-  def hit = {
+  def hit(): Unit = {
     hits+=1
     println(s"Hit!!!")
-    if (hits == len) sink
+    if (hits == len) sink()
   }
-
 
   override def toString: String = s"\nShip $id is a $shipType which is $len long and its destroyed state is $destroyed"
 }

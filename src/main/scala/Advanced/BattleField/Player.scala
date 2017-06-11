@@ -16,7 +16,7 @@ class Player(id: Int) {
 
   initShips() //called on creation of player to initialise the ships
 
-  def initBoard(x: Int, y: Int) = board.init(x,y,this)
+  def initBoard(x: Int, y: Int): Unit = board.init(x,y,this)
 
   def initShips(): Unit ={
     addShip(PatrolBoat(1))
@@ -28,51 +28,59 @@ class Player(id: Int) {
     addShip(Carrier(7))
   }
 
-  def addShip(ship: Ship) = ships += ship
+  def addShip(ship: Ship): Unit = ships += ship
 
-  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: Orientation.Value) = {
+  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: Orientation.Value): Unit = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.shipType == shipType)
 
     shipTypeCount.length match {
-      case 0 => println(s"Sorry you have no more ${shipType}s left")
+      case 0 => println(s"Sorry0 $id has already been placed")
 
-      case _ if shipTypeCount.length > 0 => {
-        board.placeShip(x,y,shipTypeCount(0),o)
-        ships -= shipTypeCount(0)
-        shipsInPlay += shipTypeCount(0)
-        println(ships)}
+      case _ if shipTypeCount.nonEmpty => board.placeShip(x, y, shipTypeCount.head, o) match {
+          case true =>
+            ships -= shipTypeCount.head
+            shipsInPlay += shipTypeCount.head
+          case false => println("Sorry en error occurred in placing Ship")
+        }
 
       case _ => println("How did you manage to break it")
     }
   }
 
-  def placeShip(x: Int, y: Int, id: Int, o: Orientation.Value) = {
+  def placeShip(x: Int, y: Int, id: Int, o: Orientation.Value): Unit = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.id == id)
 
     shipTypeCount.length match {
-      case 0 => println(s"Sorry0 ${id} has already been placed")
+      case 0 => println(s"Sorry0 $id has already been placed")
 
-      case _ if shipTypeCount.length > 0 => {
-        board.placeShip(x,y,shipTypeCount(0),o)
-        ships -= shipTypeCount(0)
-        shipsInPlay += shipTypeCount(0)
-        println(ships)}
+      case _ if shipTypeCount.nonEmpty =>
+        board.placeShip(x, y, shipTypeCount.head, o) match {
+          case true =>
+            ships -= shipTypeCount.head
+            shipsInPlay += shipTypeCount.head
+          case false => println("Sorry en error occurred in placing Ship")
+        }
 
       case _ => println("How did you manage to break it")
     }
   }
 
-  def destroyShip(id: Int) = {
+  def destroyShip(id: Int): Unit = {
     //TODO: Ensure ship is only deleted if it exists
-    shipsInPlay -= shipsInPlay.filter(s => s.id == id)(0)
+    try {
+      shipsInPlay -= shipsInPlay.filter(s => s.id == id).head
+    }catch {
+      case x: Throwable => println(x.getMessage)
+      case _ => println("You messed up!!!")
+    }
 
-    if (shipsInPlay.length == 0) {
+    if (shipsInPlay.isEmpty) {
       println(s"Player ${this.id} has lost")
       lost = true
     }
   }
 
-  override def toString() = s"Player $id"
+  override def toString = s"Player $id"
 }

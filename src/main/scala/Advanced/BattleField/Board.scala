@@ -7,20 +7,20 @@ import scala.collection.mutable.ArrayBuffer
   */
 class Board {
   var squares: ArrayBuffer[Square] = new ArrayBuffer[Square]
-  var bounds = (0,0)
-  var owner: Player = null
+  var bounds: (Int,Int) = (0,0)
+  var owner: Player = _
 
   def init(x: Int, y: Int, player: Player): Unit = {
     for (i<- 0 until x; j<- 0 until y) squares += new Square(i,j)
     bounds = (x,y)
-    owner = player;
+    owner = player
     println(owner)
   }
 
   def hit(x: Int, y: Int): Boolean = {
 
     val square = squares.filter(s => s.pos_x == x && s.pos_y == y)
-    val isHit = square(0).hit
+    val isHit = square.head.hit()
 
     if (square(0).ship != null && square(0).ship.destroyed){
       println(square(0).ship.id)
@@ -32,12 +32,29 @@ class Board {
 
   def placeShip(x: Int, y: Int, ship: Ship, o: Orientation.Value): Boolean ={
     o match {
-      case _ if !squares.filter(s => (s.pos_x >= x || s.pos_x <= x + ship.len)&& s.pos_y == y).forall(s => s.ship == null) => println("sorry squares occupied"); false
-      case Orientation.VERTICAL if x + ship.len -1 > bounds._1 => println("sorry ship wont fit in that orientation"); false
-      case Orientation.HORIZONTAL if y + ship.len -1 > bounds._2 => println("sorry ship wont fit in that orientation"); false
-      case Orientation.VERTICAL => squares.filter(s => (s.pos_x >= x || s.pos_x <= x + ship.len-1)&& s.pos_y == y).foreach(s => s.assignShip(ship)); true
-      case Orientation.HORIZONTAL => squares.filter(s => (s.pos_y >= y || s.pos_y <= y + ship.len-1)&& s.pos_x == x).foreach(s => s.assignShip(ship)); true
+      case _ if !squares.filter(s => (s.pos_x >= x && s.pos_x <= x + ship.len)&& s.pos_y == y).forall(s => s.ship == null) => println(s"sorry squares occupied : $ship"); false
+      case Orientation.VERTICAL if y + ship.len -1 > (bounds._2 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
+      case Orientation.HORIZONTAL if x + ship.len -1 > (bounds._1 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
+      case Orientation.HORIZONTAL => squares.filter(s => (s.pos_x >= x && s.pos_x <= x + ship.len-1)&& s.pos_y == y).foreach(s => s.assignShip(ship)); true
+      case Orientation.VERTICAL => squares.filter(s => (s.pos_y >= y && s.pos_y <= y + ship.len-1)&& s.pos_x == x).foreach(s => s.assignShip(ship)); true
       case _ => println("I have no idea how you got here"); false
     }
+  }
+
+  def showGrid(): Unit={
+    var msg: String = ""
+    //(0 until bounds._1).toBuffer.foreach(p => {msg += s"\n$p" ; (0 until bounds._2).toBuffer.foreach(p => msg += " 0 ")})
+    for(i <- 0 until bounds._1){
+      msg += "\n"
+      for(j <- 0 until bounds._2){
+
+        squares.filter(s => s.pos_x == j && s.pos_y == i ).head match{
+          case x if x.ship != null => msg += s"| ${x.ship.id} |"
+          case _ => msg += "|   |"
+        }
+
+      }
+    }
+    println(msg)
   }
 }
