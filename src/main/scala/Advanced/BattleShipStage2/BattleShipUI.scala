@@ -13,7 +13,7 @@ import scala.collection.mutable.ListBuffer
 import scala.swing._
 
 class BattleShipUI extends MainFrame {
-
+  //TODO: Rounded buttons for hit RoundButton()
   title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800)
 
