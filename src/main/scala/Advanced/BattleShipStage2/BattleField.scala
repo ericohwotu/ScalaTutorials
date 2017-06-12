@@ -13,8 +13,7 @@ object BattleField extends App {
     * Phase 0: Initiate the board and a assign ships to player
     *
     * */
-    //TODO: Implement GUI - started
-
+  //TODO: Implement GUI - started
   val bounds = (12,12)
   var matchOver = false
   var phaseTwo = true //TODO: change to false when phase one implemented
@@ -28,28 +27,22 @@ object BattleField extends App {
   player1.initBoard(bounds._1,bounds._2)
   opponent.initBoard(bounds._1,bounds._2)
 
-  //TODO: Add Automatic ship placement for CPU player
-  /*player1.placeShip((Math.random()*bounds._1).toInt,(Math.random()*bounds._2).toInt, ShipType.PATROL, Orientation.VERTICAL)
-  player1.placeShip((Math.random()*bounds._1).toInt,(Math.random()*bounds._2).toInt, ShipType.PATROL, Orientation.HORIZONTAL)
-  cpu.placeShip((Math.random()*bounds._1).toInt,(Math.random()*bounds._2).toInt, ShipType.PATROL, Orientation.VERTICAL)
-  cpu.placeShip((Math.random()*bounds._1).toInt,(Math.random()*bounds._2).toInt, ShipType.PATROL, Orientation.VERTICAL)*/
+  //TODO: Add Automatic ship placement for CPU player - completed
 
-  player1.placeShip(3,4, 1, ShipOrientation.VERTICAL)
-  player1.placeShip(8,8, 2, ShipOrientation.HORIZONTAL)
-  player1.placeShip(0,0, 7, ShipOrientation.VERTICAL)
-  player1.placeShip(1,1, 3, ShipOrientation.VERTICAL)
-  player1.placeShip(7,6, 4, ShipOrientation.HORIZONTAL)
-  player1.placeShip(0,6, 6, ShipOrientation.HORIZONTAL)
-  player1.placeShip(6,9, 5, ShipOrientation.VERTICAL)
 
+
+  //opponent.board.showGrid()
+  placeAllShips(player1)
+  placeAllShips(opponent)
+  opponent.board.showGrid()
   //cpu.initBoard(bounds._1,bounds._2)
-  opponent.placeShip(2,2, ShipType.PATROL, ShipOrientation.VERTICAL)
-  opponent.placeShip(8,8, ShipType.PATROL, ShipOrientation.HORIZONTAL)
-  opponent.placeShip(0,0, ShipType.CARRIER, ShipOrientation.VERTICAL)
-  opponent.placeShip(7,5, ShipType.BATTLESHIP, ShipOrientation.HORIZONTAL)
-  opponent.placeShip(7,6, ShipType.BATTLESHIP, ShipOrientation.HORIZONTAL)
-  opponent.placeShip(6,11, ShipType.SUBMARINE, ShipOrientation.HORIZONTAL)
-  opponent.placeShip(6,9, ShipType.DESTROYER, ShipOrientation.HORIZONTAL)
+//  opponent.placeShip(2,2, ShipType.PATROL, ShipOrientation.VERTICAL)
+//  opponent.placeShip(8,8, ShipType.PATROL, ShipOrientation.HORIZONTAL)
+//  opponent.placeShip(0,0, ShipType.CARRIER, ShipOrientation.VERTICAL)
+//  opponent.placeShip(7,5, ShipType.BATTLESHIP, ShipOrientation.HORIZONTAL)
+//  opponent.placeShip(7,6, ShipType.BATTLESHIP, ShipOrientation.HORIZONTAL)
+//  opponent.placeShip(6,11, ShipType.SUBMARINE, ShipOrientation.HORIZONTAL)
+//  opponent.placeShip(6,9, ShipType.DESTROYER, ShipOrientation.HORIZONTAL)
 
   //show the user interface
   val ui = new BattleShipUI
@@ -65,7 +58,10 @@ object BattleField extends App {
     }
     if(!matchOver) matchPhase()
   }
+  //end of game loop
+  //ui.close()
 
+  //------------------------------------------------- function definitions --------------------------------------------//
   def setupPhase(player: Player): Unit ={
     //TODO: Implement grid to show users position of their ships - completed
     //TODO: Implement more stringent ErrorHandling
@@ -105,7 +101,7 @@ object BattleField extends App {
 
   def matchPhase(): Unit ={
     playerTurn match {
-      case true => println(player1.shipsInPlay);//ui.resetFields()//runRound(player1,opponent)
+      case true => println(" ");//ui.resetFields()//runRound(player1,opponent)
       case false if playAgainstCpu => ui.resetFields(); runCPU(opponent,player1)
       case false if !playAgainstCpu=> ui.resetFields(); runRound(opponent,player1)
     }
@@ -124,6 +120,7 @@ object BattleField extends App {
       player.tries += Tuple2(x,y)
       if(opponent.lost)matchOver = true
     }
+
     def runRound(player: Player, opponent: Player): Unit ={
       //TODO: Implement Error handling for different input combinations
       //print tries
@@ -143,10 +140,28 @@ object BattleField extends App {
           // add this try to the players tries
           player.tries += Tuple2 (arr(0).trim.toInt, arr(1).trim.toInt)
       }
-
       //check if the opponent has lost
       if(opponent.lost) matchOver = true
     }
   }
-  ui.close()
+
+  def placeAllShips(player: Player): Unit ={
+    for(i<-1 to 7){
+      //declare variables for each ship
+      var x: Int = 0
+      var y: Int = 0
+      var o = ShipOrientation.VERTICAL
+
+      do {
+        x = (Math.random() * bounds._1).toInt
+        y = (Math.random() * bounds._2).toInt
+        (Math.random() * 2).toInt match{
+          case 0 => o = ShipOrientation.VERTICAL
+          case 1 => o = ShipOrientation.HORIZONTAL
+          case _ => println(s"Oops placeAllShips: $i")
+        }
+
+      }while(!player.placeShip(x,y,i,o))
+    }
+  }
 }

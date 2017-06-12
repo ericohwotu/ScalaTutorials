@@ -31,40 +31,42 @@ class Player(id: Int) {
 
   def addShip(ship: Ship): Unit = ships += ship
 
-  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: ShipOrientation.Value): Unit = {
+  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: ShipOrientation.Value): Boolean = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.shipType == shipType)
 
     shipTypeCount.length match {
-      case 0 => println(s"Sorry0 $id has already been placed")
+      case 0 => println(s"Sorry0 $id has already been placed"); false
 
       case _ if shipTypeCount.nonEmpty => board.placeShip(x, y, shipTypeCount.head, o) match {
           case true =>
             ships -= shipTypeCount.head
             shipsInPlay += shipTypeCount.head
-          case false => println("Sorry en error occurred in placing Ship")
+            true
+          case false => println("Sorry en error occurred in placing Ship"); false
         }
 
-      case _ => println("How did you manage to break it")
+      case _ => println("How did you manage to break it"); false
     }
   }
 
-  def placeShip(x: Int, y: Int, id: Int, o: ShipOrientation.Value): Unit = {
+  def placeShip(x: Int, y: Int, id: Int, o: ShipOrientation.Value): Boolean = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.id == id)
 
     shipTypeCount.length match {
-      case 0 => println(s"Sorry0 $id has already been placed")
+      case 0 => println(s"Sorry0 $id has already been placed"); false
 
       case _ if shipTypeCount.nonEmpty =>
         board.placeShip(x, y, shipTypeCount.head, o) match {
           case true =>
             ships -= shipTypeCount.head
             shipsInPlay += shipTypeCount.head
-          case false => println("Sorry en error occurred in placing Ship")
+            true
+          case false => println("Sorry en error occurred in placing Ship"); false
         }
 
-      case _ => println("How did you manage to break it")
+      case _ => println("How did you manage to break it"); false
     }
   }
 

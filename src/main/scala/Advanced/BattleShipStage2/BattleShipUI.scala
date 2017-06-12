@@ -22,6 +22,7 @@ class BattleShipUI extends MainFrame {
   var attackSection = new GridPanel(opponent.board.bounds._1,opponent.board.bounds._2)
   var fieldSection = new GridPanel(player1.board.bounds._1,player1.board.bounds._1)
 
+
   resetFields()
   contents = new BoxPanel(Orientation.Vertical) {
     //add menu
@@ -57,8 +58,10 @@ class BattleShipUI extends MainFrame {
       focusPainted = false
       borderPainted = true
       background = Color.BLACK
+
       if(gridSquare.attacked == true){background = Color.WHITE; enabled = false}
       if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.GREEN
+      //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
 
       listenTo(this)
       reactions += {
@@ -92,6 +95,7 @@ class BattleShipUI extends MainFrame {
       if(gridSquare.ship != null)background = Color.GREEN
       if(gridSquare.attacked == true)background = Color.YELLOW
       if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.RED
+      //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.BLACK
 
       //println(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)
       listenTo(this)
@@ -110,7 +114,6 @@ class BattleShipUI extends MainFrame {
     fieldButton = initFieldArea(player1.board.bounds._1,player1.board.bounds._2)
 
     //revalidate the attack section
-    attackSection.enabled = playerTurn
     attackSection.contents.clear()
     attackSection.border = new LineBorder(Color.BLACK)
     attackButton.foreach(b=> {attackSection.contents += b})//; println(s"adding ${b.name}")})
