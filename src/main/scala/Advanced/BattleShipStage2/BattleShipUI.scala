@@ -26,8 +26,11 @@ class BattleShipUI extends MainFrame {
 
   resetFields()
   contents = new BoxPanel(Orientation.Vertical) {
+    background = Color.DARK_GRAY
+
     //add menu
     menuBar = new MenuBar(){
+      //background = Color.LIGHT_GRAY
       contents += new Menu("Game"){
         contents += new Menu("Play vs CPU"){
           contents += new MenuItem("Easy")
@@ -140,13 +143,15 @@ class BattleShipUI extends MainFrame {
 
     //revalidate the attack section
     attackSection.contents.clear()
-    attackSection.border = new LineBorder(Color.BLACK)
+    attackSection.background = Color.DARK_GRAY
+    attackSection.border = new LineBorder(Color.DARK_GRAY)
     attackButton.foreach(b=> {attackSection.contents += b})//; println(s"adding ${b.name}")})
     attackSection.revalidate()
 
     //revalidate the field section
     fieldSection.contents.clear()
-    fieldSection.border = new LineBorder(Color.BLACK)
+    fieldSection.background = Color.DARK_GRAY
+    fieldSection.border = new LineBorder(Color.DARK_GRAY)
     fieldButton.foreach(b=> fieldSection.contents += b)
     fieldSection.revalidate()
   }
