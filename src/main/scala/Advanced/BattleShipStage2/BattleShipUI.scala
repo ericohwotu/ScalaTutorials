@@ -7,13 +7,14 @@ package Advanced.BattleShipStage2
 import java.awt.Color
 import javax.swing.border.LineBorder
 
-import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver}
+import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver, closeUi}
 
 import scala.collection.mutable.ListBuffer
 import scala.swing._
 
 class BattleShipUI extends MainFrame {
   //TODO: Rounded buttons for hit RoundButton()
+  //TODO: Stop Stuttering () update buttons by name
   title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800)
 
@@ -54,14 +55,10 @@ class BattleShipUI extends MainFrame {
     //println(s"Get attack = $playerTurn")
     new Button() {
       var gridSquare: Square = opponent.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
-      name = s"id-$i-$j-attack"
+      name = s"$i-$j"
       focusPainted = false
       borderPainted = true
       background = Color.BLACK
-
-      if(gridSquare.attacked){background = Color.WHITE; enabled = false}
-      if(gridSquare.attacked && gridSquare.ship != null)background = Color.GREEN
-      //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
 
       listenTo(this)
       reactions += {
@@ -69,7 +66,7 @@ class BattleShipUI extends MainFrame {
           background =  opponent.board.hitc(i,j)
           contentAreaFilled = true
           enabled = false
-          if (opponent.board.hitc(i,j)==Color.WHITE){playerTurn = false; resetFields()}
+          if (background==Color.WHITE){playerTurn = false}
           if (opponent.lost) matchOver = true
 
           println(player1)
@@ -87,25 +84,53 @@ class BattleShipUI extends MainFrame {
     //println(s"Get field = $playerTurn")
     new Button() {
       var gridSquare: Square = player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
-      name = s"id-$i-$j"
+      name = s"$i,$j"
       focusPainted = false
       borderPainted = true
       enabled = false
       background = Color.BLUE
-      if(gridSquare.ship != null)background = Color.GREEN
+      /*if(gridSquare.ship != null)background = Color.GREEN
       if(gridSquare.attacked)background = Color.WHITE
       if(gridSquare.attacked && gridSquare.ship != null)background = Color.RED
-      //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.BLACK
+      //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.BLACK*/
 
       //println(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)
       listenTo(this)
       reactions += {
-        case e: event.ButtonClicked =>
+        case _: event.ButtonClicked =>
+
           if (player1.board.hit(i, j)) background = Color.GREEN else background = Color.WHITE
           contentAreaFilled = true
           enabled = false
       }
     }
+  }
+
+  def updateAllButtons(): Unit ={
+    attackButton.foreach(x => updateAttackSquare(x))
+    fieldButton.foreach(y => updateFieldSquare(y))
+  }
+
+  def updateAttackSquare(button: Button): Unit ={
+
+    val i = button.name.split("-")(0).toInt
+    val j = button.name.split("-")(1).toInt
+    val gridSquare: Square = opponent.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
+
+    if(gridSquare.attacked){button.background = Color.WHITE; button.enabled = false}
+    if(gridSquare.attacked && gridSquare.ship != null)button.background = Color.GREEN
+    //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
+    button.revalidate()
+  }
+  def updateFieldSquare(button: Button): Unit ={
+    val i = button.name.split(",")(0).toInt
+    val j = button.name.split(",")(1).toInt
+    val gridSquare: Square = player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
+
+    if(gridSquare.ship != null)button.background = Color.GREEN
+    if(gridSquare.attacked)button.background = Color.WHITE
+    if(gridSquare.attacked && gridSquare.ship != null)button.background = Color.RED
+    button.revalidate()
   }
 
   def resetFields(): Unit ={
@@ -124,7 +149,14 @@ class BattleShipUI extends MainFrame {
     fieldSection.border = new LineBorder(Color.BLACK)
     fieldButton.foreach(b=> fieldSection.contents += b)
     fieldSection.revalidate()
+  }
 
+  def showEndDialog(winner: String): Unit={
+    //var s = Dialog.showMessage(contents.head, s"$winner is the winner", title="Game Over")
+    val s = Dialog.showConfirmation(contents.head,s"$winner is the winner",title="Game Over")
+    if (s == Dialog.Result.Ok){
+      closeUi()
+    }
   }
 
 }

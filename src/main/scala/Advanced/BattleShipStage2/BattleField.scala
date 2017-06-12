@@ -47,6 +47,7 @@ object BattleField extends App {
   //show the user interface
   val ui = new BattleShipUI
   ui.visible = true
+  ui.updateAllButtons()
 
   //game loop
   while(!matchOver) {
@@ -58,6 +59,12 @@ object BattleField extends App {
     }
     if(!matchOver) matchPhase()
   }
+  var winner = player1.toString
+  player1.lost match{
+    case true => winner = opponent.toString
+    case false => winner = player1.toString
+  }
+  ui.showEndDialog(winner)
   //end of game loop
   //ui.close()
 
@@ -102,8 +109,8 @@ object BattleField extends App {
   def matchPhase(): Unit ={
     playerTurn match {
       case true => println(" ");//ui.resetFields()//runRound(player1,opponent)
-      case false if playAgainstCpu => ui.resetFields(); runCPU(opponent,player1)
-      case false if !playAgainstCpu=> ui.resetFields(); runRound(opponent,player1)
+      case false if playAgainstCpu => ui.updateAllButtons(); runCPU(opponent,player1)
+      case false if !playAgainstCpu=> ui.updateAllButtons(); runRound(opponent,player1)
     }
 
     def runCPU(player: Player, opponent: Player): Unit = {
@@ -115,7 +122,7 @@ object BattleField extends App {
       }
       if (!opponent.board.hit(x, y)) {
         playerTurn = ! playerTurn
-        ui.resetFields()
+        ui.updateAllButtons()
       }
       player.tries += Tuple2(x,y)
       if(opponent.lost)matchOver = true
@@ -135,7 +142,7 @@ object BattleField extends App {
         case arr if arr(1).trim.toInt > (bounds._1 -1) => println(s"Max Y value allowed is ${bounds._2 -1}")
         case arr =>
           //if there is a hit replay else next players turn
-          if (! opponent.board.hit (arr(0).trim.toInt, arr(1).trim.toInt) ) {playerTurn = ! playerTurn; ui.resetFields()}
+          if (! opponent.board.hit (arr(0).trim.toInt, arr(1).trim.toInt) ) {playerTurn = ! playerTurn; ui.updateAllButtons()}
 
           // add this try to the players tries
           player.tries += Tuple2 (arr(0).trim.toInt, arr(1).trim.toInt)
@@ -163,5 +170,10 @@ object BattleField extends App {
 
       }while(!player.placeShip(x,y,i,o))
     }
+  }
+
+  def closeUi(): Unit ={
+    ui.close()
+    return 0
   }
 }
