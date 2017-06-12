@@ -7,6 +7,7 @@ import scala.collection.mutable.ListBuffer
   */
 class Player(id: Int) {
   //TODO: Implement remove ship method to allow for players to change their minds
+  //TODO: Track user guesses and prevent from guessing again
   var ships = new ListBuffer[Ship]
   var shipsInPlay = new ListBuffer[Ship]
   var tries = new ListBuffer[(Int,Int)]

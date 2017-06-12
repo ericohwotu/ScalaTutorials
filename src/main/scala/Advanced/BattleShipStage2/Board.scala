@@ -40,7 +40,7 @@ class Board {
 
     square.head.hit() match {
       case true => isHit = Color.GREEN
-      case false => isHit = Color.YELLOW
+      case false => isHit = Color.WHITE
     }
 
     if (square(0).ship != null && square(0).ship.destroyed){

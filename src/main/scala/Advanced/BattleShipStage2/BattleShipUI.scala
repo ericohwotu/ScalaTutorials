@@ -7,14 +7,22 @@ package Advanced.BattleShipStage2
 import java.awt.Color
 import javax.swing.border.LineBorder
 
-import Advanced.BattleShipStage2.BattleField.{opponent, player1}
+import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver}
 
 import scala.collection.mutable.ListBuffer
 import scala.swing._
 
 class BattleShipUI extends MainFrame {
+
   title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800)
+
+  var attackButton = initAttackArea(opponent.board.bounds._1,opponent.board.bounds._2)
+  var fieldButton = initFieldArea(player1.board.bounds._1,player1.board.bounds._2)
+  var attackSection = new GridPanel(opponent.board.bounds._1,opponent.board.bounds._2)
+  var fieldSection = new GridPanel(player1.board.bounds._1,player1.board.bounds._1)
+
+  resetFields()
   contents = new BoxPanel(Orientation.Vertical) {
     //add menu
     menuBar = new MenuBar(){
@@ -27,21 +35,12 @@ class BattleShipUI extends MainFrame {
         }
         contents += new CheckMenuItem("Play vs Player")
         contents += new MenuItem("Reset")
-
       }
     }
     //contents += new Label("Attack Section")
-    contents += new GridPanel(12, 12) {
-      border = new LineBorder(Color.BLACK)
-      name = "ATTACK"
-      initAttackArea(opponent.board.bounds._1,opponent.board.bounds._2).foreach(s => contents += s)
-    }
+    contents += attackSection
     contents += new Label(" ")
-    contents += new GridPanel(12, 12) {
-      border = new LineBorder(Color.BLACK)
-
-      initFieldArea(player1.board.bounds._1,player1.board.bounds._2).foreach(s => contents += s)
-    }
+    contents += fieldSection
   }
 
   def initAttackArea(x: Int, y: Int): ListBuffer[Button]={
@@ -51,11 +50,15 @@ class BattleShipUI extends MainFrame {
   }
 
   def getAttackSquare(i: Int, j: Int): Button = {
+    //println(s"Get attack = $playerTurn")
     new Button() {
-      name = s"id-$i-$j"
+      var gridSquare = opponent.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
+      name = s"id-$i-$j-attack"
       focusPainted = false
       borderPainted = true
       background = Color.BLACK
+      if(gridSquare.attacked == true){background = Color.WHITE; enabled = false}
+      if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.GREEN
 
       listenTo(this)
       reactions += {
@@ -63,6 +66,10 @@ class BattleShipUI extends MainFrame {
           background =  opponent.board.hitc(i,j)
           contentAreaFilled = true
           enabled = false
+          if (opponent.board.hitc(i,j)==Color.WHITE){playerTurn = false; resetFields()}
+          if (opponent.lost) matchOver = true
+
+          println(player1)
       }
     }
   }
@@ -74,14 +81,19 @@ class BattleShipUI extends MainFrame {
   }
 
   def getFieldSquare(i: Int, j: Int): Button = {
+    //println(s"Get field = $playerTurn")
     new Button() {
+      var gridSquare = player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
       name = s"id-$i-$j"
       focusPainted = false
       borderPainted = true
       enabled = false
       background = Color.BLUE
-      if(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)background = Color.GREEN
-      println(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)
+      if(gridSquare.ship != null)background = Color.GREEN
+      if(gridSquare.attacked == true)background = Color.YELLOW
+      if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.RED
+
+      //println(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)
       listenTo(this)
       reactions += {
         case e: event.ButtonClicked =>
@@ -90,6 +102,26 @@ class BattleShipUI extends MainFrame {
           enabled = false
       }
     }
+  }
+
+  def resetFields(): Unit ={
+    //println(s"player turn = $playerTurn")
+    attackButton = initAttackArea(opponent.board.bounds._1,opponent.board.bounds._2)
+    fieldButton = initFieldArea(player1.board.bounds._1,player1.board.bounds._2)
+
+    //revalidate the attack section
+    attackSection.enabled = playerTurn
+    attackSection.contents.clear()
+    attackSection.border = new LineBorder(Color.BLACK)
+    attackButton.foreach(b=> {attackSection.contents += b})//; println(s"adding ${b.name}")})
+    attackSection.revalidate()
+
+    //revalidate the field section
+    fieldSection.contents.clear()
+    fieldSection.border = new LineBorder(Color.BLACK)
+    fieldButton.foreach(b=> fieldSection.contents += b)
+    fieldSection.revalidate()
+
   }
 
 }
