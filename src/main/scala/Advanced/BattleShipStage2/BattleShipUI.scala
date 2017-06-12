@@ -17,10 +17,10 @@ class BattleShipUI extends MainFrame {
   title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800)
 
-  var attackButton = initAttackArea(opponent.board.bounds._1,opponent.board.bounds._2)
-  var fieldButton = initFieldArea(player1.board.bounds._1,player1.board.bounds._2)
-  var attackSection = new GridPanel(opponent.board.bounds._1,opponent.board.bounds._2)
-  var fieldSection = new GridPanel(player1.board.bounds._1,player1.board.bounds._1)
+  var attackButton: ListBuffer[Button] = initAttackArea(opponent.board.bounds._1,opponent.board.bounds._2)
+  var fieldButton: ListBuffer[Button] = initFieldArea(player1.board.bounds._1,player1.board.bounds._2)
+  var attackSection: GridPanel = new GridPanel(opponent.board.bounds._1,opponent.board.bounds._2)
+  var fieldSection: GridPanel = new GridPanel(player1.board.bounds._1,player1.board.bounds._1)
 
 
   resetFields()
@@ -53,14 +53,14 @@ class BattleShipUI extends MainFrame {
   def getAttackSquare(i: Int, j: Int): Button = {
     //println(s"Get attack = $playerTurn")
     new Button() {
-      var gridSquare = opponent.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
+      var gridSquare: Square = opponent.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
       name = s"id-$i-$j-attack"
       focusPainted = false
       borderPainted = true
       background = Color.BLACK
 
-      if(gridSquare.attacked == true){background = Color.WHITE; enabled = false}
-      if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.GREEN
+      if(gridSquare.attacked){background = Color.WHITE; enabled = false}
+      if(gridSquare.attacked && gridSquare.ship != null)background = Color.GREEN
       //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
 
       listenTo(this)
@@ -86,15 +86,15 @@ class BattleShipUI extends MainFrame {
   def getFieldSquare(i: Int, j: Int): Button = {
     //println(s"Get field = $playerTurn")
     new Button() {
-      var gridSquare = player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
+      var gridSquare: Square = player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head
       name = s"id-$i-$j"
       focusPainted = false
       borderPainted = true
       enabled = false
       background = Color.BLUE
       if(gridSquare.ship != null)background = Color.GREEN
-      if(gridSquare.attacked == true)background = Color.YELLOW
-      if(gridSquare.attacked == true && gridSquare.ship != null)background = Color.RED
+      if(gridSquare.attacked)background = Color.WHITE
+      if(gridSquare.attacked && gridSquare.ship != null)background = Color.RED
       //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.BLACK
 
       //println(player1.board.squares.filter(x=> x.pos_x==i && x.pos_y==j).head.ship != null)
