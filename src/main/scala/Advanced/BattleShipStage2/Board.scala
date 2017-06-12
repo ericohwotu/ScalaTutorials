@@ -1,4 +1,4 @@
-package Advanced.BattleField
+package Advanced.BattleShipStage2
 
 import java.awt.Color
 

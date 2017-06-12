@@ -1,10 +1,8 @@
-package Advanced.BattleField
+package Advanced.BattleShipStage2
 
 /**
   * Created by Eric on 11/06/2017.
   */
-
-import java.awt.Color
 
 class Square(pos: (Int,Int)) {
   val pos_x: Int = pos._1

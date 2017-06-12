@@ -1,19 +1,19 @@
-package Advanced.BattleField
+package Advanced.BattleShipStage2
 
 /**
   * Created by Eric on 11/06/2017.
   */
 
-import scala.swing._
-import BattleField.{opponent, player1}
 import java.awt.Color
 import javax.swing.border.LineBorder
 
+import Advanced.BattleShipStage2.BattleField.{opponent, player1}
+
 import scala.collection.mutable.ListBuffer
-import scala.swing.event.MouseClicked
+import scala.swing._
 
 class BattleShipUI extends MainFrame {
-  title = "Battle Ship"
+  title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800)
   contents = new BoxPanel(Orientation.Vertical) {
     //add menu
