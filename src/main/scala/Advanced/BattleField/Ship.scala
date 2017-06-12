@@ -5,7 +5,7 @@ package Advanced.BattleField
   */
 abstract class Ship {
   var destroyed = false
-  var orient = Orientation.VERTICAL
+  var orient = ShipOrientation.VERTICAL
   var hits = 0
   val shipType: ShipType.Value
   val len: Int

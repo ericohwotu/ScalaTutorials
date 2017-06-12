@@ -30,7 +30,7 @@ class Player(id: Int) {
 
   def addShip(ship: Ship): Unit = ships += ship
 
-  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: Orientation.Value): Unit = {
+  def placeShip(x: Int, y: Int, shipType: ShipType.Value, o: ShipOrientation.Value): Unit = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.shipType == shipType)
 
@@ -48,7 +48,7 @@ class Player(id: Int) {
     }
   }
 
-  def placeShip(x: Int, y: Int, id: Int, o: Orientation.Value): Unit = {
+  def placeShip(x: Int, y: Int, id: Int, o: ShipOrientation.Value): Unit = {
     //TODO: Ensure Ship is not moved to in game ships if not placed
     val shipTypeCount = ships.filter(s => s.id == id)
 
@@ -73,7 +73,7 @@ class Player(id: Int) {
       shipsInPlay -= shipsInPlay.filter(s => s.id == id).head
     }catch {
       case x: Throwable => println(x.getMessage)
-      case _ => println("You messed up!!!")
+      case _: Throwable => println("You messed up!!!")
     }
 
     if (shipsInPlay.isEmpty) {
