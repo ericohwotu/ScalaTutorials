@@ -1,16 +1,22 @@
 package Advanced.BattleShipStage2
 
 import java.awt.Color
+
 import scala.collection.mutable.ListBuffer
 import scala.swing._
-import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver, closeUi}
+import Advanced.BattleShipStage2.BattleField.{closeUi, matchOver, opponent, player1, playerTurn}
+
+import scala.swing.event.{MouseClicked, MousePressed}
 
 /**
   * Created by Administrator on 13/06/2017.
   */
-class FieldSquareUI(i: Int, j: Int) extends Button{
+class FieldSquareUI(i: Int, j: Int, popup: PopupMenu) extends Button{
+
   init()
   addListener()
+  addMouseListener()
+
 
   def init(): Unit =  {
     name = s"$i,$j"
@@ -25,6 +31,7 @@ class FieldSquareUI(i: Int, j: Int) extends Button{
     if(gridSquare.ship != null)background = Color.GREEN
     if(gridSquare.attacked)background = Color.WHITE
     if(gridSquare.attacked && gridSquare.ship != null)background = Color.RED
+    if(gridSquare.attacked && gridSquare.ship != null && gridSquare.ship.destroyed)background = Color.GRAY
     revalidate()
   }
   def addListener() : Unit = {
@@ -37,4 +44,19 @@ class FieldSquareUI(i: Int, j: Int) extends Button{
         enabled = false
     }
   }
+
+  def addMouseListener(): Unit = {
+    listenTo(mouse.clicks, mouse.moves)
+    reactions += {
+      case evt: MousePressed if evt.peer.getButton == 3 =>
+        var pos = evt.peer.getLocationOnScreen
+        popup.setVisible(true, pos.x, pos.y)
+        //matchOver = true
+      case e =>
+        println(s"weeee ${e.getClass}")
+        //matchOver = true
+
+    }
+  }
 }
+

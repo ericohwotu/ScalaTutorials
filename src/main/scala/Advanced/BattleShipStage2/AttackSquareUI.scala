@@ -8,7 +8,7 @@ import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, mat
 /**
   * Created by Administrator on 13/06/2017.
   */
-class AttackSquareUI(i: Int, j: Int) extends Button {
+class AttackSquareUI(i: Int, j: Int, popup: PopupMenu) extends Button {
   //initialise and add listener once
   init()
   addListener()
@@ -22,15 +22,15 @@ class AttackSquareUI(i: Int, j: Int) extends Button {
 
   //update the field
   def update(): Unit = {
-    //val i = name.split("-")(0).toInt
-    //val j = name.split("-")(1).toInt
     val gridSquare: Square = opponent.board.squares.filter(x => x.pos_x == i && x.pos_y == j).head
 
     if (gridSquare.attacked) {
       background = Color.WHITE; enabled = false
     }
     if (gridSquare.attacked && gridSquare.ship != null) background = Color.GREEN
-    //if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
+
+    if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
+
     revalidate()
   }
 

@@ -5,14 +5,20 @@ package Advanced.BattleShipStage2
   */
 
 import java.awt.Color
+import java.awt.event.{MouseEvent, MouseListener}
+import javax.swing.JButton
 import javax.swing.border.LineBorder
+import javax.swing.event.MouseInputListener
 
 import scala.collection.mutable.ListBuffer
 import scala.swing._
 import Advanced.BattleShipStage2.BattleField.{closeUi, matchOver, opponent, player1, playerTurn}
 
+import scala.swing.event.{ButtonClicked, Event, MouseClicked}
 
-class FieldSection(x: Int, y: Int) extends GridPanel(x,y) {
+
+class FieldSection(x: Int, y: Int, popupMenu: PopupMenu) extends GridPanel(x,y) {
+
   var fieldButtons: ListBuffer[FieldSquareUI] = init(opponent.board.bounds._1,opponent.board.bounds._2)
 
   //initialise area
@@ -25,13 +31,14 @@ class FieldSection(x: Int, y: Int) extends GridPanel(x,y) {
 
     var fieldSquares = new ListBuffer[FieldSquareUI]
 
-    for(i<- 0 until x; j<- 0 until y)fieldSquares+= new FieldSquareUI(j,i)
+    for(i<- 0 until x; j<- 0 until y)fieldSquares+= new FieldSquareUI(j,i,popupMenu)
 
     fieldSquares.foreach(b=> {contents += b})
 
     revalidate()
 
     fieldSquares
+
   }
 
   //update squares in area
