@@ -12,7 +12,6 @@ class BattleShipUI extends MainFrame {
   //TODO: Stop Stuttering () update buttons by name - completed
 
   val popup: PopupMenu = new PopupMenu
-  initPopup()
 
   title = "Battle Ship v2"
   preferredSize = new Dimension(400, 800) //opening dimension ? ecuates to size in javax.swing
@@ -44,6 +43,10 @@ class BattleShipUI extends MainFrame {
     attackSection.update()
 
     fieldSection.update()
+  }
+
+  def showPhaseTwoDialog(): Unit ={
+    Dialog.showMessage(contents.head,s"Setup Complete: Start Phase 2",title="Setup Complete")
   }
 
   def showEndDialog(winner: String): Unit={

@@ -3,12 +3,12 @@ package Advanced.BattleShipStage2
 import java.awt.Color
 import scala.collection.mutable.ListBuffer
 import scala.swing._
-import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver, closeUi}
+import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver, phaseTwo}
 
 /**
   * Created by Administrator on 13/06/2017.
   */
-class AttackSquareUI(i: Int, j: Int, popup: PopupMenu) extends Button {
+class AttackSquareUI(parent: AttackSection, i: Int, j: Int, popup: PopupMenu) extends Button with PopupUpdate {
   //initialise and add listener once
   init()
   addListener()
@@ -29,7 +29,7 @@ class AttackSquareUI(i: Int, j: Int, popup: PopupMenu) extends Button {
     }
     if (gridSquare.attacked && gridSquare.ship != null) background = Color.GREEN
 
-    if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.RED
+    if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.GRAY
 
     revalidate()
   }
@@ -44,8 +44,12 @@ class AttackSquareUI(i: Int, j: Int, popup: PopupMenu) extends Button {
         enabled = false
         if (background == Color.WHITE) {
           playerTurn = false
+          playMiss()
+        }else{
+          playHit()
         }
         if (opponent.lost) matchOver = true
+        parent.update();
 
         println(player1)
     }

@@ -25,7 +25,7 @@ class AttackSection(x:Int, y:Int, popupMenu: PopupMenu) extends GridPanel(x,y){
 
     var attackSquares = new ListBuffer[AttackSquareUI]
 
-    for(i<- 0 until x; j<- 0 until y)attackSquares+=new AttackSquareUI(j,i,popupMenu)
+    for(i<- 0 until x; j<- 0 until y)attackSquares+=new AttackSquareUI(this,j,i,popupMenu)
 
     //add each square to the layout
     attackSquares.foreach(b=> {contents += b})

@@ -31,7 +31,7 @@ class FieldSection(x: Int, y: Int, popupMenu: PopupMenu) extends GridPanel(x,y) 
 
     var fieldSquares = new ListBuffer[FieldSquareUI]
 
-    for(i<- 0 until x; j<- 0 until y)fieldSquares+= new FieldSquareUI(j,i,popupMenu)
+    for(i<- 0 until x; j<- 0 until y)fieldSquares+= new FieldSquareUI(this, j,i,popupMenu)
 
     fieldSquares.foreach(b=> {contents += b})
 

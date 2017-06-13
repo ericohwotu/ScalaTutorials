@@ -55,8 +55,8 @@ class Board {
     o match {
       case _ if !squares.filter(s => (s.pos_x >= x && s.pos_x <= x + ship.len-1)&& s.pos_y == y).forall(s => s.ship == null) => println(s"sorry squares occupied : $ship"); false
       case _ if !squares.filter(s => (s.pos_y >= y && s.pos_y <= y + ship.len-1)&& s.pos_x == x).forall(s => s.ship == null) => println(s"sorry squares occupied : $ship"); false
-      case ShipOrientation.VERTICAL if y + ship.len > (bounds._2 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
-      case ShipOrientation.HORIZONTAL if x + ship.len > (bounds._1 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
+      case ShipOrientation.VERTICAL if y + ship.len -1 > (bounds._2 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
+      case ShipOrientation.HORIZONTAL if x + ship.len -1 > (bounds._1 - 1) => println(s"sorry ship wont fit in that orientation : $ship"); false
       case ShipOrientation.HORIZONTAL => squares.filter(s => (s.pos_x >= x && s.pos_x <= x + ship.len-1)&& s.pos_y == y).foreach(s => s.assignShip(ship)); true
       case ShipOrientation.VERTICAL => squares.filter(s => (s.pos_y >= y && s.pos_y <= y + ship.len-1)&& s.pos_x == x).foreach(s => s.assignShip(ship)); true
       case _ => println("I have no idea how you got here"); false

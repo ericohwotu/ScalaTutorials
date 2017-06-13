@@ -3,22 +3,21 @@ package Advanced.BattleShipStage2
 /**
   * Created by Administrator on 13/06/2017.
   */
-import scala.swing._
 import javax.swing.JPopupMenu
+import scala.swing._
+import scala.swing.SequentialContainer.Wrapper
 
-class PopupMenu extends Component
-{
-  override lazy val peer : JPopupMenu = new JPopupMenu
+object PopupMenu {
+  private[PopupMenu] trait JPopupMenuMixin { def popupMenuWrapper: PopupMenu }
+}
 
+class PopupMenu extends Component with Wrapper {
 
-  def add(item:MenuItem) : Unit = { peer.add(item.peer) }
-  def setVisible(visible:Boolean, x: Int,y: Int) : Unit = {
-    peer.setVisible(visible)
-    peer.setLocation(x,y)
+  override lazy val peer: JPopupMenu = new JPopupMenu with PopupMenu.JPopupMenuMixin with SuperMixin {
+    def popupMenuWrapper = PopupMenu.this
   }
-  def closeNow(): Unit ={
-    peer.setVisible(false)
-  }
+
+  def show(invoker: Component, x: Int, y: Int): Unit = peer.show(invoker.peer, x, y)
 
   /* Create any other peer methods here */
 }

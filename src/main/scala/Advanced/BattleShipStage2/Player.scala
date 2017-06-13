@@ -42,6 +42,7 @@ class Player(id: Int) {
           case true =>
             ships -= shipTypeCount.head
             shipsInPlay += shipTypeCount.head
+            println("success its been placed")
             true
           case false => println("Sorry en error occurred in placing Ship"); false
         }
