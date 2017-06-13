@@ -4,7 +4,7 @@ package Advanced.BattleShipStage2
   * Created by Eric on 11/06/2017.
   */
 
-class Square(pos: (Int,Int)) {
+class Square(pos: (Int,Int)) extends Serializable{
 
   val pos_x: Int = pos._1
   val pos_y: Int = pos._2

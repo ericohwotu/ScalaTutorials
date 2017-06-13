@@ -18,11 +18,13 @@ class AttackSquareUI(parent: AttackSection, i: Int, j: Int, popup: PopupMenu) ex
     name = s"$i-$j"
     focusPainted = false
     background = Color.BLACK
+    if(!phaseTwo)enabled = false else enabled = true
   }
 
   //update the field
   def update(): Unit = {
     val gridSquare: Square = opponent.board.squares.filter(x => x.pos_x == i && x.pos_y == j).head
+    if(!phaseTwo)enabled = false else enabled = true
 
     if (gridSquare.attacked) {
       background = Color.WHITE; enabled = false

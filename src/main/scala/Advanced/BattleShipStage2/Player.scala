@@ -5,7 +5,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * Created by Eric on 11/06/2017.
   */
-class Player(id: Int) {
+class Player(id: Int) extends Serializable{
   //TODO: Implement remove ship method to allow for players to change their minds
   //TODO: Track user guesses and prevent from guessing again
   var ships = new ListBuffer[Ship]

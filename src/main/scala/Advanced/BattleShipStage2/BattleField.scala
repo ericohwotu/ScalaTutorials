@@ -1,6 +1,8 @@
 package Advanced.BattleShipStage2
 
+import scala.concurrent.Future
 import scala.io.StdIn.readLine
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Eric on 10/06/2017.
@@ -28,6 +30,19 @@ object BattleField extends App with SetupPhase{
   player1.initBoard(bounds._1,bounds._2)
   opponent.initBoard(bounds._1,bounds._2)
 
+  val s = new Server()
+  val c = new Client()
+
+  Future {
+    s.startServer()
+  }
+  Thread.sleep(10000)
+
+  s.sendPlayerInfo(player1)
+//  Future {
+//    c.startClient()
+//  }
+
   //TODO: Add Automatic ship placement for CPU player - completed
 
   //placeAllShips(player1)
@@ -40,14 +55,18 @@ object BattleField extends App with SetupPhase{
   ui.visible = true
   ui.updateAllButtons()
 
+
+
   //game loop
   while(!matchOver) {
     while(!phaseTwo){
       playerTurn match {
         case true =>
+          //println(player1.ships)
           if (player1.ships.length==0) {
             phaseTwo = true
             ui.showPhaseTwoDialog()
+            phaseTwo = true
           }
           //setupPhase(player1)
           //println(player1.ships)

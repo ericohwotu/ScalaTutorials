@@ -47,6 +47,7 @@ class BattleShipUI extends MainFrame {
 
   def showPhaseTwoDialog(): Unit ={
     Dialog.showMessage(contents.head,s"Setup Complete: Start Phase 2",title="Setup Complete")
+    updateAllButtons()
   }
 
   def showEndDialog(winner: String): Unit={

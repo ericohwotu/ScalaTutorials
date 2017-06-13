@@ -14,7 +14,7 @@ import scala.swing.event.{MouseClicked, MousePressed}
 class FieldSquareUI(parent: FieldSection, i: Int, j: Int, popup: PopupMenu) extends Button with PopupUpdate{
 
   init()
-  addListener()
+  //addListener()
   addMouseListener()
 
 

@@ -7,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Eric on 11/06/2017.
   */
-class Board {
+class Board extends Serializable{
   var squares: ArrayBuffer[Square] = new ArrayBuffer[Square]
   var bounds: (Int,Int) = (0,0)
   var owner: Player = _
