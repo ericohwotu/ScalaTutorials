@@ -40,9 +40,10 @@ class Server {
       s.close()
     }
     running = false
+    startAttackServer()
   }
 
-  def startClientAttackServer(): Unit ={
+  def startAttackServer(): Unit ={
     run=true
     val server = new ServerSocket(9999)
     while (run) {
@@ -98,7 +99,6 @@ class Server {
     val s = new Socket(InetAddress.getByName("localhost"), 9998)
     //val in = new BufferedSource(s.getInputStream()).getLines()
     val out = new PrintStream(s.getOutputStream())
-
     out.println(s"$x,$y")
     out.flush()
 

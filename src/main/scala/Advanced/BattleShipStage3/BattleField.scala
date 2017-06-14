@@ -56,7 +56,7 @@ object BattleField extends App with SetupPhase{
       }
       playerTurn match {
 
-        case true =>
+        case _ =>
           println(s"ready: $ready readyCount: $readyCount")
           if (player1.ships.length == 0 && ready==false) {
             ready = true
@@ -71,11 +71,12 @@ object BattleField extends App with SetupPhase{
             ui.showPhaseTwoDialog()
             ui.updateAllButtons()
           }
-        case false => setupPhase(opponent)
+        //case false => setupPhase(opponent)
       }
     }
     //println("entered")
     if (!matchOver) matchPhase()
+    println(s"$playerTurn")
   }
   var winner = player1.toString
   player1.lost match {
