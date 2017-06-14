@@ -3,7 +3,7 @@ package Advanced.BattleShipStage3
 import java.io._
 import java.net._
 
-import BattleField.{opponent, player1}
+import BattleField.{opponent, player1,readyCount}
 
 import scala.swing._
 
@@ -28,11 +28,12 @@ class Server {
       opponent = player2
 
       //write output stream
-      val out = new ObjectOutputStream(s.getOutputStream())
-      out.writeObject(player1)
-      out.flush()
+      //val out = new ObjectOutputStream(s.getOutputStream())
+      //out.writeObject(player1)
+      //out.flush()
 
-      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "recieved")
+      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
+      readyCount += 1
 //      println("Received: " + player2.id)
       s.close()
     }
@@ -45,22 +46,20 @@ class Server {
 
 
   def sendPlayerInfo(player: Player): Unit ={
-//    println("writing")
-//    val s = new Socket(InetAddress.getByName("localhost"), 9998)
-//    println("writing")
-//    val in = new BufferedSource(s.getInputStream()).getLines()
-//    println("writing")
-//    val out = new ObjectOutputStream(s.getOutputStream())
-//    println("writing")
-//    out.writeObject(player)
-//    println("writing")
-//    out.flush()
-//    println("writing")
-//    //println(in.next())
-//    println("writing")
-//    s.close()
-//    println("writing")
-//    println("closed")
+    val s = new Socket(InetAddress.getByName("localhost"), 9998)
+    //recieve the data coming in
+    //val in = new ObjectInputStream(s.getInputStream())
+    //val player1 = in.readObject().asInstanceOf[Player]
+    //opponent = player1
+
+    //send the data
+    val out = new ObjectOutputStream(s.getOutputStream())
+    out.writeObject(player)
+    out.flush()
+
+    Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Sent")
+
+    s.close()
   }
 
 }

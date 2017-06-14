@@ -22,6 +22,7 @@ object BattleField extends App with SetupPhase{
   var playAgainstCpu = true
   var isHost = false
   var isClient = false
+  var readyCount = 0;
 
   //initialise player
   println("Initiating Player please wait")
@@ -52,10 +53,15 @@ object BattleField extends App with SetupPhase{
 
         case true =>
           println("Use UI")
-          if (player1.ships.length == 0) {
-            phaseTwo = true
+          if (player1.ships.length == 0 && readyCount==0) {
+            readyCount += 1
             ui.showPhaseTwoDialog()
+            //send player info over network
             if(isClient)client.sendPlayerInfo(player1)
+            if(isHost)server.sendPlayerInfo(player1)
+          }
+          if(readyCount==2 && !playAgainstCpu){
+            phaseTwo=true
           }
         case false => setupPhase(opponent)
       }
