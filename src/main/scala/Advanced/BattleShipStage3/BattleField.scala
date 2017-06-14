@@ -19,9 +19,10 @@ object BattleField extends App with SetupPhase{
   var matchOver = false
   var phaseTwo = false //TODO: change to false when phase one implemented
   var playerTurn = true
-  var playAgainstCpu = true
+  var playAgainstCpu = false
   var isHost = false
   var isClient = false
+  var ready = false
   var readyCount = 0;
 
   //initialise player
@@ -52,16 +53,19 @@ object BattleField extends App with SetupPhase{
       playerTurn match {
 
         case true =>
-          println("Use UI")
-          if (player1.ships.length == 0 && readyCount==0) {
-            readyCount += 1
-            ui.showPhaseTwoDialog()
+          println(s"ready: $ready readyCount: $readyCount")
+          if (player1.ships.length == 0 && ready==false) {
+            ready = true
+            readyCount+=1
+
             //send player info over network
             if(isClient)client.sendPlayerInfo(player1)
             if(isHost)server.sendPlayerInfo(player1)
           }
           if(readyCount==2 && !playAgainstCpu){
             phaseTwo=true
+            ui.showPhaseTwoDialog()
+            ui.updateAllButtons()
           }
         case false => setupPhase(opponent)
       }

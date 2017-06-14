@@ -31,9 +31,10 @@ class Server {
       //val out = new ObjectOutputStream(s.getOutputStream())
       //out.writeObject(player1)
       //out.flush()
-
-      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
+      println("recieved")
       readyCount += 1
+      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
+
 //      println("Received: " + player2.id)
       s.close()
     }

@@ -30,8 +30,9 @@ class Client {
 //      val out = new PrintStream(s.getOutputStream())
 //      out.println(player2)
 //      out.flush()
-      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
+      println("recieved")
       readyCount += 1
+      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
       println("Received: " + player2)
       s.close()
     }
