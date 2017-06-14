@@ -1,9 +1,10 @@
-package Advanced.BattleShipStage2
+package Advanced.BattleShipStage3
 
 import java.awt.Color
-import scala.collection.mutable.ListBuffer
+
+import BattleField.{matchOver, opponent, phaseTwo, playerTurn}
+
 import scala.swing._
-import Advanced.BattleShipStage2.BattleField.{opponent, player1, playerTurn, matchOver, phaseTwo}
 
 /**
   * Created by Administrator on 13/06/2017.

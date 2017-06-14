@@ -1,12 +1,12 @@
-package Advanced.BattleShipStage2
+package Advanced.BattleShipStage3
 
-import java.net._
 import java.io._
+import java.net._
 
-import scala.io._
 import BattleField.{opponent, player1}
 
 import scala.swing._
+
 /**
   * Created by Eric on 13/06/2017.
   */

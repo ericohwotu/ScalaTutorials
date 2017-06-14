@@ -1,7 +1,9 @@
-package Advanced.BattleShipStage2
+package Advanced.BattleShipStage3
 
 import java.awt.Color
-import BattleField.{opponent, player1, closeUi}
+
+import BattleField.{closeUi, opponent, player1}
+
 import scala.swing._
 
 /**
