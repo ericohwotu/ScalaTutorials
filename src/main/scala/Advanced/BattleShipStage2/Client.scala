@@ -2,32 +2,34 @@ package Advanced.BattleShipStage2
 
 import java.io._
 import java.net._
-
 import scala.io._
+import BattleField.{opponent}
 
 /**
   * Created by Eric on 13/06/2017.
   */
 class Client {
   var run: Boolean = true
-
+  var running: Boolean = false
   def startClientServer(): Unit ={
     val server = new ServerSocket(9998)
     while (run) {
-
+      running = true
       val s = server.accept()
-      println("recieved")
-      val in = new ObjectInputStream(s.getInputStream())
-      println("recieved")
+      //read input stream
+      val in = new BufferedSource(s.getInputStream()).getLines()
+      val player2 = in.next()
+      //opponent = player2
+
+      //write output stream
       val out = new PrintStream(s.getOutputStream())
-      println("recieved")
-      val player = in.readObject().asInstanceOf[Player]
-      println("recieved")
-      out.println("nice to meet you")
+      out.println(player2)
       out.flush()
-      println("Received: ")
+
+      println("Received: " + player2)
       s.close()
     }
+    running = false
   }
   def stopServer(): Unit ={
     run = false
@@ -43,18 +45,23 @@ class Client {
     s.close()
   }
 
-  def sendPlayerInfo(): Unit ={
+  def sendPlayerInfo(player: Player): Unit ={
     val s = new Socket(InetAddress.getByName("localhost"), 9999)
-    val in = new BufferedSource(s.getInputStream()).getLines()
-    val out = new PrintStream(s.getOutputStream())
-    out.println("sendPlayerInfo")
+    //recieve the data coming in
+    val in = new ObjectInputStream(s.getInputStream())
+    val player1 = in.readObject().asInstanceOf[Player]
+    opponent = player1
+
+    //send the data
+    val out = new ObjectOutputStream(s.getOutputStream())
+    out.writeObject(player)
     out.flush()
-    println(in.next())
+
     s.close()
   }
 
   def attackShip(): Unit ={
-
+    println("Attack")
   }
 
 }

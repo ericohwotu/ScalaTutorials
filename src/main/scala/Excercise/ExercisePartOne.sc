@@ -52,11 +52,10 @@ def finobacci(n: Int, prev: Int=0, prev2: Int=0, count: Int = 0): Int = {
   }
 }
 
-finobacci(7)
+finobacci(9)
 
 //excecise 5
 def bunnyEars(n: Int, count: Int = 0, incr: Int = 0): Int ={
-
   println(incr)
   if (count<n){
     bunnyEars(n, count+1, incr+2)

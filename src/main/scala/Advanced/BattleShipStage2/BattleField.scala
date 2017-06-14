@@ -25,20 +25,17 @@ object BattleField extends App with SetupPhase{
 
   //initialise player
   println("Initiating Player please wait")
-  val player1 = new Player(1)
-  val opponent = new Player(2)
+  var player1 = new Player(1)
+  var opponent = new Player(2)
   player1.initBoard(bounds._1,bounds._2)
   opponent.initBoard(bounds._1,bounds._2)
 
-  val s = new Server()
-  val c = new Client()
+  //instantiate server handlers
+  val server = new Server()
+  val client = new Client()
 
-  Future {
-    s.startServer()
-  }
-  Thread.sleep(10000)
 
-  placeAllShips(opponent)
+  //placeAllShips(opponent)
 
 
 //  Future {
@@ -71,7 +68,7 @@ object BattleField extends App with SetupPhase{
             phaseTwo = true
           }
           //setupPhase(player1)
-          //println(player1.ships)
+          println(player1.ships)
         case false => setupPhase(opponent)
       }
     }
