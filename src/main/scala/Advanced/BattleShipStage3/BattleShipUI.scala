@@ -15,7 +15,7 @@ class BattleShipUI extends MainFrame {
 
   val popup: PopupMenu = new PopupMenu
 
-  title = "Battle Ship v2"
+  title = "Battle Ship v3"
   preferredSize = new Dimension(400, 800) //opening dimension ? ecuates to size in javax.swing
 
   //initialise the field areas

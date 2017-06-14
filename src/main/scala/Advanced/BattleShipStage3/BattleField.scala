@@ -50,6 +50,10 @@ object BattleField extends App with SetupPhase{
 
   while (!matchOver) {
     while (!phaseTwo) {
+      if(!playAgainstCpu){
+        if(isHost)playerTurn = true
+        if(isClient)playerTurn = false
+      }
       playerTurn match {
 
         case true =>

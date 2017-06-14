@@ -2,7 +2,7 @@ package Advanced.BattleShipStage3
 
 import java.awt.Color
 
-import BattleField.{matchOver, opponent, phaseTwo, playerTurn}
+import BattleField.{matchOver, opponent, phaseTwo, playerTurn, isHost, server, isClient, client}
 
 import scala.swing._
 
@@ -53,7 +53,8 @@ class AttackSquareUI(parent: AttackSection, i: Int, j: Int, popup: PopupMenu) ex
         }
         if (opponent.lost) matchOver = true
         parent.update()
-
+        if(isHost)server.attackPlayer(i,j)
+        if(isClient)client.attackPlayer(i,j)
         println(opponent.shipsInPlay)
     }
   }
