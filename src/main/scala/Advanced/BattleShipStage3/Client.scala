@@ -3,7 +3,7 @@ package Advanced.BattleShipStage3
 import java.io._
 import java.net._
 
-import BattleField.{opponent,readyCount,player1,playerTurn}
+import BattleField.{opponent,readyCount,player1,playerTurn, ui}
 
 import scala.io._
 import scala.swing._
@@ -48,7 +48,8 @@ class Client {
 
   def startClientAttackServer(): Unit ={
     run=true
-    val server = new ServerSocket(9998)
+    val server = new ServerSocket(9996)
+    println("Start Attack Client running")
     while (run) {
 
       running = true
@@ -56,21 +57,24 @@ class Client {
       println("Attack Client running")
 
       val s = server.accept()
-
+      playerTurn = true
       //read input stream
       val in = new BufferedSource(s.getInputStream()).getLines()
-
+      playerTurn = true
       val position = in.next()
 
       val x = position.split(",").head.toInt
 
       val y = position.split(",")(1).toInt
 
-      player1.board.hit(x,y)
+      Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Received")
+
+      if(!player1.board.hit(x,y))playerTurn = true else playerTurn = false
+
+      ui.updateAllButtons()
 
       println("Been Attacked")
 
-      playerTurn = true
       s.close()
     }
     running = false
@@ -81,14 +85,15 @@ class Client {
   }
 
   def attackPlayer(x: Int, y: Int): Unit = {
-    val s = new Socket(InetAddress.getByName("localhost"), 9999)
+    Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Sent")
+    val s = new Socket(InetAddress.getByName("localhost"), 9997)
     //val in = new BufferedSource(s.getInputStream()).getLines()
-    val out = new PrintStream(s.getOutputStream())
+    println(s"attacking player at $x and $y")
 
+    val out = new PrintStream(s.getOutputStream())
     out.println(s"$x,$y")
     out.flush()
 
-    playerTurn = false
     s.close()
   }
 

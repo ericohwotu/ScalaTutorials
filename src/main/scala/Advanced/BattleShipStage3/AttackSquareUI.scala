@@ -25,11 +25,12 @@ class AttackSquareUI(parent: AttackSection, i: Int, j: Int, popup: PopupMenu) ex
   //update the field
   def update(): Unit = {
     val gridSquare: Square = opponent.board.squares.filter(x => x.pos_x == i && x.pos_y == j).head
-    if(!phaseTwo)enabled = false else enabled = true
+    if(!playerTurn)enabled = false else enabled = true
 
     if (gridSquare.attacked) {
       background = Color.WHITE; enabled = false
     }
+
     if (gridSquare.attacked && gridSquare.ship != null) background = Color.GREEN
 
     if(gridSquare.ship != null && gridSquare.ship.destroyed && gridSquare.attacked == true)background = Color.GRAY
@@ -52,9 +53,9 @@ class AttackSquareUI(parent: AttackSection, i: Int, j: Int, popup: PopupMenu) ex
           playHit()
         }
         if (opponent.lost) matchOver = true
-        parent.update()
         if(isHost)server.attackPlayer(i,j)
         if(isClient)client.attackPlayer(i,j)
+        parent.update()
         println(opponent.shipsInPlay)
     }
   }
