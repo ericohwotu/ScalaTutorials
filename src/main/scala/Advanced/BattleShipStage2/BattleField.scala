@@ -38,7 +38,9 @@ object BattleField extends App with SetupPhase{
   }
   Thread.sleep(10000)
 
-  s.sendPlayerInfo(player1)
+  placeAllShips(opponent)
+
+
 //  Future {
 //    c.startClient()
 //  }
@@ -46,7 +48,7 @@ object BattleField extends App with SetupPhase{
   //TODO: Add Automatic ship placement for CPU player - completed
 
   //placeAllShips(player1)
-  placeAllShips(opponent)
+  //placeAllShips(opponent)
   opponent.board.showGrid()
 
 

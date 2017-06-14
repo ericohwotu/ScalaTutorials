@@ -14,14 +14,14 @@ class Client {
   def startClientServer(): Unit ={
     val server = new ServerSocket(9998)
     while (run) {
-      var player: Player = null
+
       val s = server.accept()
       println("recieved")
       val in = new ObjectInputStream(s.getInputStream())
       println("recieved")
       val out = new PrintStream(s.getOutputStream())
       println("recieved")
-      player = (Player) in.readObject()
+      val player = in.readObject().asInstanceOf[Player]
       println("recieved")
       out.println("nice to meet you")
       out.flush()

@@ -14,7 +14,9 @@ class GameMenuBar extends MenuBar{
       contents += new MenuItem("Hard")
       contents += new MenuItem("You Will Lose")
     }
-    contents += new CheckMenuItem("Play vs Player")
+    contents += new Menu("Play vs Player"){
+      contents += new MenuItem("Play as Host")
+    }
     contents += new MenuItem("Reset")
   }
 }
