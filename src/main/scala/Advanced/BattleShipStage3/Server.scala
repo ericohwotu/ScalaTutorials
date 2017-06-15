@@ -3,7 +3,7 @@ package Advanced.BattleShipStage3
 import java.io._
 import java.net._
 
-import BattleField.{ui, opponent, player1, playerTurn, readyCount}
+import BattleField.{ui, opponent, player1, playerTurn, readyCount, clientAddress}
 
 import scala.io.BufferedSource
 import scala.swing._
@@ -37,7 +37,7 @@ class Server {
       //process data and close socket
       readyCount += 1
 
-      Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
+      //Dialog.showMessage(null,s"${opponent.shipsInPlay.length} + the ships left are ${opponent.shipsInPlay.length}", "Recieved")
 
       println("Received: " + player2)
 
@@ -70,7 +70,7 @@ class Server {
 
       val y = position.split(",")(1).toInt
 
-      Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Received")
+      //Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Received")
 
       if(!player1.board.hit(x,y))playerTurn = true else playerTurn = false
 
@@ -106,7 +106,7 @@ class Server {
   }
 
   def attackPlayer(x: Int, y: Int): Unit = {
-    Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Sent")
+    //Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Sent")
     val s = new Socket(InetAddress.getByName("localhost"), 9996)
     //val in = new BufferedSource(s.getInputStream()).getLines()
     println(s"attacking player at $x and $y")

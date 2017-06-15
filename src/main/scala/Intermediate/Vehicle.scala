@@ -1,5 +1,5 @@
 package Intermediate
-
+import scala.collection.mutable.ArrayBuffer
 /**
   * Created by Administrator on 06/06/2017.
   */
@@ -10,7 +10,7 @@ abstract class Vehicle {
 
   val id: Int
 
-  var parts: scala.collection.mutable.ArrayBuffer[Part] = scala.collection.mutable.ArrayBuffer()
+  var parts: ArrayBuffer[Part] = ArrayBuffer()
 
   val vehicleType: VehicleType.Value
 
