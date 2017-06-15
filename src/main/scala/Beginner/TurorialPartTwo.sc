@@ -40,7 +40,7 @@ def addUniques(a: Int, b: Int, c: Int): Int = {
 
 }
 
-var uniques = addUniques(7,2,3)
+var uniques = addUniques(2,2,3)
 
 //Temperature
 def isTempAcceptable(temp: Int, isSummer: Boolean): Boolean ={
