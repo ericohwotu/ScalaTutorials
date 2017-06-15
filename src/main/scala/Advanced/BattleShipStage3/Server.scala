@@ -89,7 +89,7 @@ class Server {
 
 
   def sendPlayerInfo(player: Player): Unit ={
-    val s = new Socket(InetAddress.getByName("localhost"), 9998)
+    val s = new Socket(InetAddress.getByName(clientAddress), 9998)
     //receive the data coming in
     //val in = new ObjectInputStream(s.getInputStream())
     //val player1 = in.readObject().asInstanceOf[Player]
@@ -107,7 +107,7 @@ class Server {
 
   def attackPlayer(x: Int, y: Int): Unit = {
     //Dialog.showMessage(null,s"Attacking Player (x,y) $x and $y", "Sent")
-    val s = new Socket(InetAddress.getByName("localhost"), 9996)
+    val s = new Socket(InetAddress.getByName(clientAddress), 9996)
     //val in = new BufferedSource(s.getInputStream()).getLines()
     println(s"attacking player at $x and $y")
 
