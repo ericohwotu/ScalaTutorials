@@ -1,4 +1,4 @@
-package Intermediate
+package Intermediate;
 
 /**
   * Created by Administrator on 05/06/2017.
@@ -30,9 +30,14 @@ object GarageExample {
     for(i<- 1 to (Math.random()*10).toInt+1)
       Garage.addEmployee(new Employee(i,s"${firstNames(i % firstNames.length)} ${lastNames(i % lastNames.length)}"))
 
+    Garage.operate()
+
     Garage.open()
+
+    Garage.operate()
+
+    Garage.close()
     //println(Garage.displayInventory())
   }
 
 }
-

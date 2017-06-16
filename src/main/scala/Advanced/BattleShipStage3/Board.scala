@@ -19,6 +19,8 @@ class Board extends Serializable{
     println(owner)
   }
 
+  //TODO: Condense hits into a single function
+  //used for server hitting actions
   def hit(x: Int, y: Int): Boolean = {
 
     val square = squares.filter(s => s.pos_x == x && s.pos_y == y)
@@ -32,6 +34,7 @@ class Board extends Serializable{
     isHit //return true if hit or false if not
   }
 
+  //used fo the ui hitting actions
   def hitc(x: Int, y: Int): Color = {
 
     val square = squares.filter(s => s.pos_x == x && s.pos_y == y)
@@ -65,7 +68,7 @@ class Board extends Serializable{
 
   def showGrid(): Unit={
     var msg: String = ""
-    //(0 until bounds._1).toBuffer.foreach(p => {msg += s"\n$p" ; (0 until bounds._2).toBuffer.foreach(p => msg += " 0 ")})
+
     for(i <- 0 until bounds._1){
       msg += "\n"
       for(j <- 0 until bounds._2){

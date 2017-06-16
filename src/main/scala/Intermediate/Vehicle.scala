@@ -24,8 +24,8 @@ abstract class Vehicle {
     for (i <- 1 to partsCount) {
 
       val brokenProbability = Math.random()
-      val partPrice = Math.random() * 35 + 5
-      val repairTime = (Math.random()*20).toInt + 1
+      val partPrice = (Math.random() * 100) + 25
+      val repairTime = (Math.random()*5).toInt + 1
       val isBroken =  brokenProbability match {
         case _ if brokenProbability < brokenChance => true
         case _ => false

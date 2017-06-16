@@ -1,63 +1,63 @@
-There are currently 10 vehicles in the garage and 7 employees working today
+There are currently 10 vehicles in the garage and 2 employees working today
 
 Vehicle Record: 
 ID: 1 
-Type: BIKE
+Type: CAR
 Assigned Employee: John Lavall
-Cost: £179.49
-Fix Time: 66 minutes
-Vehicle Record: 
-ID: 4 
-Type: CAR
-Assigned Employee: Julia Edwards
-Cost: £97.26
-Fix Time: 66 minutes
-Vehicle Record: 
-ID: 6 
-Type: CAR
-Assigned Employee: Eric Lockette
-Cost: £186.01
-Fix Time: 72 minutes
-Vehicle Record: 
-ID: 7 
-Type: CAR
-Assigned Employee: John Johnson
-Cost: £137.73
-Fix Time: 97 minutes
+Cost: £549.75
+Fix Time: 23 minutes
 Vehicle Record: 
 ID: 2 
 Type: CAR
 Assigned Employee: Jim Williams
-Cost: £129.02
-Fix Time: 102 minutes
+Cost: £865.44
+Fix Time: 34 minutes
 Vehicle Record: 
 ID: 3 
-Type: BIKE
-Assigned Employee: George Davis
-Cost: £180.95
-Fix Time: 109 minutes
-Vehicle Record: 
-ID: 9 
 Type: CAR
-Assigned Employee: Julia Edwards
-Cost: £137.23
-Fix Time: 43 minutes
-Vehicle Record: 
-ID: 10 
-Type: CAR
-Assigned Employee: Eric Lockette
-Cost: £135.09
-Fix Time: 50 minutes
+Assigned Employee: John Lavall
+Cost: £443.45
+Fix Time: 13 minutes
 Vehicle Record: 
 ID: 5 
+Type: CAR
+Assigned Employee: John Lavall
+Cost: £221.09
+Fix Time: 10 minutes
+Vehicle Record: 
+ID: 4 
+Type: CAR
+Assigned Employee: Jim Williams
+Cost: £492.58
+Fix Time: 22 minutes
+Vehicle Record: 
+ID: 6 
 Type: BIKE
-Assigned Employee: Juliet Adams
-Cost: £329.16
-Fix Time: 129 minutes
+Assigned Employee: John Lavall
+Cost: £555.31
+Fix Time: 22 minutes
+Vehicle Record: 
+ID: 7 
+Type: CAR
+Assigned Employee: Jim Williams
+Cost: £821.10
+Fix Time: 32 minutes
 Vehicle Record: 
 ID: 8 
 Type: CAR
 Assigned Employee: John Lavall
-Cost: £296.31
-Fix Time: 148 minutesTotal Earned: 1808.23 
+Cost: £592.25
+Fix Time: 23 minutes
+Vehicle Record: 
+ID: 10 
+Type: CAR
+Assigned Employee: John Lavall
+Cost: £539.32
+Fix Time: 21 minutes
+Vehicle Record: 
+ID: 9 
+Type: BIKE
+Assigned Employee: Jim Williams
+Cost: £693.68
+Fix Time: 28 minutesTotal Earned: 5773.97 
 END

@@ -1,15 +1,4 @@
-package Intermediate
-
-/**
-  * Created by Administrator on 06/06/2017.
-  */
-
-import java.util._
-
-import scala.concurrent._
-import java.util.concurrent.Executors
-import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
-
+package Intermediate;
 
 object Garage {
   var vehicles: scala.collection.mutable.ListBuffer[Vehicle] = scala.collection.mutable.ListBuffer()
@@ -27,40 +16,42 @@ object Garage {
   val csvWriter = new PrintWriter(csv)
 
   //METHODS
-  def open(): Unit = {
-    opened = true
-    implicit val ec = ExecutionContext.fromExecutorService(Executors.newWorkStealingPool(employees.length)) // set the amount of working pools to the amount of employees
+  def open(): Unit = opened = true
 
-    //begin writing the first lines tot he files
-    printWriter.write(s"There are currently ${vehicles.length} vehicles in the garage and ${employees.length} employees working today\n")
-    csvWriter.write("Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Start Time,End Time,Fix Time,Cost")
 
-    val totalEarned = calculateBills()
-    val totalVehicles = vehicles.length
-    val totalEmployees = employees.length
+  def operate(): Unit = {
+    if(opened) {
+      implicit val ec = ExecutionContext.fromExecutorService(Executors.newWorkStealingPool(employees.length)) // set the amount of working pools to the amount of employees
 
-    while (!vehicles.isEmpty || employeesWorking != 0) {
-      employees.isEmpty match {
-        case false => {
-          //select the first employee and remove them from the list
-          val e = employees.head
-          employees -= employees.head
-          //schedule the fix vehicle routine with current employee
-          Future {
-            fixVehicle(vehicles.head, e)
+      //begin writing the first lines tot he files
+      printWriter.write(s"There are currently ${vehicles.length} vehicles in the garage and ${employees.length} employees working today\n")
+      csvWriter.write("Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Fix Time,Start Time,End Time,Cost")
+
+      val totalEarned = calculateBills()
+      val totalVehicles = vehicles.length
+      val totalEmployees = employees.length
+
+      while (!vehicles.isEmpty || employeesWorking != 0) {
+        employees.isEmpty match {
+          case false => {
+            //select the first employee and remove them from the list
+            val e = employees.head
+            employees -= employees.head
+            //schedule the fix vehicle routine with current employee
+            Future {
+              fixVehicle(vehicles.head, e)
+            }
           }
+          case true => "do nothing"
         }
-        case true => "do nothing"
+        Thread.sleep(100) //allow for time to update
       }
-      Thread.sleep(100) //allow for time to update
-    }
-    printWriter.write(f"Total Earned: ${totalEarned}%2.2f \nEND")
-    csvWriter.write(f"\n\nVehicles,$totalVehicles,Employees,$totalEmployees,Total Earned,${totalEarned}%2.2f")
-    printWriter.close()
-    csvWriter.close()
-    close()
+      printWriter.write(f"Total Earned: ${totalEarned}%2.2f \nEND")
+      csvWriter.write(f"\n\nVehicles,$totalVehicles,Employees,$totalEmployees,Total Earned,${totalEarned}%2.2f")
+      printWriter.close()
+      csvWriter.close()
+    }else println("Garage is closed")
   }
-
 
   def addVehicle(vehicle: Vehicle): Unit = vehicles += vehicle
 
@@ -74,11 +65,12 @@ object Garage {
     vehicles -= v
   }
 
-  def registerEmployee(employee: Employee): Unit = employees += employee //vehicles.filter(x => (x.id == id)||(x.vehicleType == vehicleType))
+  def registerEmployee(employee: Employee): Unit = employees += employee
 
   def fixVehicle(vehicle: Vehicle, employee: Employee): Unit = {
     employeesWorking += 1
 
+    //get start times
     var now = Calendar.getInstance()
     val startHour = now.get(Calendar.HOUR)
     val startMinute = now.get(Calendar.MINUTE)
@@ -97,6 +89,7 @@ object Garage {
     for (part <- vehicle.parts) {
       part.broken match {
         case true => {
+          part.broken = false
           totalTime += part.fixTime //get the total time to complete the work
           totalCost += part.cost //get the total cost of the parts
           total += 1
@@ -115,13 +108,15 @@ object Garage {
     employees += employee
 
     employeesWorking -= 1 //decrement counter as this employee has finished working
+
+    //get the time for fix
     val end = Calendar.getInstance()
     val endHour = end.get(Calendar.HOUR)
     val endMinute = end.get(Calendar.MINUTE)
     val endSecond = end.get(Calendar.SECOND)
 
     println(endMinute + ":" + endSecond + " >>> " + employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
-    println(endMinute + ":" + endSecond + " >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f")
+    println(endMinute + ":" + endSecond + " >>> Total Elapsed Time = " + totalTime + f" seconds Total Cost = £${totalCost}%2.2f")
     printWriter.write(f"\nVehicle Record: \nID: ${vehicle.id} \nType: ${vehicle.vehicleType}\nAssigned Employee: ${employee.name}\nCost: £${totalCost}%2.2f\nFix Time: ${totalTime} minutes")
     csvWriter.write(f"\n${vehicle.id},${vehicle.vehicleType},$total,${employee.id},${employee.name},$totalTime s,$startHour:$startMinute:$startSecond,$endHour:$endMinute:$endSecond,£${totalCost}%2.2f")
   }
@@ -129,18 +124,12 @@ object Garage {
   //for(v <- vehicles)if(v.state == VehicleState.BROKEN)for(v.parts)
   def calculateBills(): Double = {
     var totalCost: Double = 0.0
-    for (v <- vehicles) {
-      v.broken match {
-        case true =>
-          for (part <- v.parts) {
-            part.broken match {
-              case true => totalCost += part.cost
-              case _ => totalCost += 0.0
-            }
-          }
-        case _ => 0.0
-      }
-    }
+    vehicles.foreach(v => v.parts.foreach(part => part.broken match {
+      case true => totalCost += part.cost
+      case _ => totalCost += 0.0
+    }))
+    //})
+
     //println(f"Total: $totalCost%2.2f")
     totalCost
   }

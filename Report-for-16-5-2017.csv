@@ -1,13 +1,13 @@
-Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Start Time,End Time,Fix Time,Cost
-1,BIKE,7,1,John Lavall,66 s,11:51:59,11:53:5,£179.49
-4,CAR,4,4,Julia Edwards,66 s,11:51:59,11:53:5,£97.26
-6,CAR,8,6,Eric Lockette,72 s,11:51:59,11:53:11,£186.01
-7,CAR,8,7,John Johnson,97 s,11:51:59,11:53:36,£137.73
-2,CAR,7,2,Jim Williams,102 s,11:51:59,11:53:41,£129.02
-3,BIKE,8,3,George Davis,109 s,11:51:59,11:53:48,£180.95
-9,CAR,5,4,Julia Edwards,43 s,11:53:5,11:53:48,£137.23
-10,CAR,7,6,Eric Lockette,50 s,11:53:11,11:54:1,£135.09
-5,BIKE,15,5,Juliet Adams,129 s,11:51:59,11:54:8,£329.16
-8,CAR,15,1,John Lavall,148 s,11:53:5,11:55:33,£296.31
+Vehicle ID,Vehicle Type,Bad Parts,Employee ID,Employee Name,Fix Time,Start Time,End Time,Cost
+1,CAR,6,1,John Lavall,23 s,1:51:4,1:51:27,£549.75
+2,CAR,11,2,Jim Williams,34 s,1:51:4,1:51:38,£865.44
+3,CAR,6,1,John Lavall,13 s,1:51:27,1:51:40,£443.45
+5,CAR,4,1,John Lavall,10 s,1:51:40,1:51:50,£221.09
+4,CAR,7,2,Jim Williams,22 s,1:51:38,1:52:0,£492.58
+6,BIKE,6,1,John Lavall,22 s,1:51:50,1:52:12,£555.31
+7,CAR,11,2,Jim Williams,32 s,1:52:0,1:52:32,£821.10
+8,CAR,8,1,John Lavall,23 s,1:52:12,1:52:35,£592.25
+10,CAR,7,1,John Lavall,21 s,1:52:35,1:52:56,£539.32
+9,BIKE,9,2,Jim Williams,28 s,1:52:32,1:53:0,£693.68
 
-Vehicles,10,Employees,7,Total Earned,1808.23
+Vehicles,10,Employees,2,Total Earned,5773.97
