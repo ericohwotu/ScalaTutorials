@@ -96,12 +96,12 @@ object Garage {
 
     for (part <- vehicle.parts) {
       part.broken match {
-        case _ if (part.broken) => {
+        case true => {
           totalTime += part.fixTime //get the total time to complete the work
           totalCost += part.cost //get the total cost of the parts
           total += 1
         }
-        case _ => {
+        case false => {
           totalTime += 0 //get the total time to complete the work
           totalCost += 0 //get the total cost of the parts
           total += 0
