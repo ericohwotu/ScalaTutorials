@@ -1,0 +1,111 @@
+There are currently 18 vehicles in the garage and 4 employees working today
+
+Vehicle Record: 
+ID: 4 
+Type: CAR
+Assigned Employee: Juliet
+Cost: £137.33
+Fix Time: 18 minutes
+Vehicle Record: 
+ID: 3 
+Type: CAR
+Assigned Employee: Julia
+Cost: £125.79
+Fix Time: 19 minutes
+Vehicle Record: 
+ID: 1 
+Type: BIKE
+Assigned Employee: Eric
+Cost: £229.45
+Fix Time: 24 minutes
+Vehicle Record: 
+ID: 5 
+Type: BIKE
+Assigned Employee: Juliet
+Cost: £122.39
+Fix Time: 13 minutes
+Vehicle Record: 
+ID: 6 
+Type: BIKE
+Assigned Employee: Julia
+Cost: £113.12
+Fix Time: 16 minutes
+Vehicle Record: 
+ID: 7 
+Type: CAR
+Assigned Employee: Eric
+Cost: £140.38
+Fix Time: 29 minutes
+Vehicle Record: 
+ID: 9 
+Type: BIKE
+Assigned Employee: Julia
+Cost: £165.61
+Fix Time: 18 minutes
+Vehicle Record: 
+ID: 2 
+Type: CAR
+Assigned Employee: John
+Cost: £348.07
+Fix Time: 54 minutes
+Vehicle Record: 
+ID: 8 
+Type: BIKE
+Assigned Employee: Juliet
+Cost: £233.03
+Fix Time: 30 minutes
+Vehicle Record: 
+ID: 12 
+Type: BIKE
+Assigned Employee: John
+Cost: £94.26
+Fix Time: 13 minutes
+Vehicle Record: 
+ID: 11 
+Type: BIKE
+Assigned Employee: Julia
+Cost: £137.61
+Fix Time: 18 minutes
+Vehicle Record: 
+ID: 10 
+Type: CAR
+Assigned Employee: Eric
+Cost: £317.35
+Fix Time: 29 minutes
+Vehicle Record: 
+ID: 14 
+Type: CAR
+Assigned Employee: John
+Cost: £207.79
+Fix Time: 25 minutes
+Vehicle Record: 
+ID: 13 
+Type: CAR
+Assigned Employee: Juliet
+Cost: £169.45
+Fix Time: 36 minutes
+Vehicle Record: 
+ID: 15 
+Type: CAR
+Assigned Employee: Julia
+Cost: £128.96
+Fix Time: 32 minutes
+Vehicle Record: 
+ID: 16 
+Type: CAR
+Assigned Employee: Eric
+Cost: £193.48
+Fix Time: 28 minutes
+Vehicle Record: 
+ID: 17 
+Type: CAR
+Assigned Employee: John
+Cost: £227.86
+Fix Time: 27 minutes
+Vehicle Record: 
+ID: 18 
+Type: CAR
+Assigned Employee: Juliet
+Cost: £141.76
+Fix Time: 22 minutesTotal Earned: 3233.67 
+END

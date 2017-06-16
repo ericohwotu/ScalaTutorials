@@ -1,0 +1,63 @@
+There are currently 11 vehicles in the garage and 7 employees working today
+
+Vehicle Record: 
+ID: 1 
+Type: CAR
+Assigned Employee: John Lavall
+Cost: £98.28
+Fix Time: 13 minutes
+Vehicle Record: 
+ID: 6 
+Type: CAR
+Assigned Employee: Eric Lockette
+Cost: £175.00
+Fix Time: 15 minutes
+Vehicle Record: 
+ID: 2 
+Type: CAR
+Assigned Employee: Jim Williams
+Cost: £100.01
+Fix Time: 17 minutes
+Vehicle Record: 
+ID: 3 
+Type: BIKE
+Assigned Employee: George Davis
+Cost: £155.03
+Fix Time: 17 minutes
+Vehicle Record: 
+ID: 4 
+Type: BIKE
+Assigned Employee: Julia Edwards
+Cost: £178.04
+Fix Time: 23 minutes
+Vehicle Record: 
+ID: 5 
+Type: CAR
+Assigned Employee: Juliet Adams
+Cost: £205.61
+Fix Time: 26 minutes
+Vehicle Record: 
+ID: 9 
+Type: CAR
+Assigned Employee: Eric Lockette
+Cost: £174.02
+Fix Time: 15 minutes
+Vehicle Record: 
+ID: 10 
+Type: CAR
+Assigned Employee: Jim Williams
+Cost: £161.23
+Fix Time: 21 minutes
+Vehicle Record: 
+ID: 7 
+Type: CAR
+Assigned Employee: John Johnson
+Cost: £340.90
+Fix Time: 39 minutes
+Vehicle Record: 
+ID: 8 
+Type: CAR
+Assigned Employee: John Lavall
+Cost: £170.79
+Fix Time: 30 minutesTotal Earned: 2018.60 
+END
