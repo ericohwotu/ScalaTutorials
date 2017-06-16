@@ -1,4 +1,4 @@
-package Intermediate
+package Intermediate.GarageSimulation
 
 /**
   * Created by Administrator on 06/06/2017.

@@ -1,9 +1,17 @@
-package Intermediate;
+package Intermediate.GarageSimulation
+
+import java.util._
+
+import scala.concurrent._
+import java.util.concurrent.Executors
+import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
+import scala.collection.mutable._
+
 
 object Garage {
-  var vehicles: scala.collection.mutable.ListBuffer[Vehicle] = scala.collection.mutable.ListBuffer()
-  var fixedVehicles: scala.collection.mutable.ListBuffer[Vehicle] = scala.collection.mutable.ListBuffer()
-  var employees: scala.collection.mutable.ListBuffer[Employee] = scala.collection.mutable.ListBuffer()
+  var vehicles: ListBuffer[Vehicle] = ListBuffer()
+  var fixedVehicles: ListBuffer[Vehicle] = ListBuffer()
+  var employees: ListBuffer[Employee] = ListBuffer()
   var employeesWorking = 0
   var opened: Boolean = false
 

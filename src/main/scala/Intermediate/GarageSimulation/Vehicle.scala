@@ -1,5 +1,7 @@
-package Intermediate
+package Intermediate.GarageSimulation
+
 import scala.collection.mutable.ArrayBuffer
+
 /**
   * Created by Administrator on 06/06/2017.
   */

@@ -1,5 +1,5 @@
 object StringsSequence{
-    val s1 = "hello how are you you are a stupid and fool"
+    val s1 = "hello how are you you are a cool"
     val s2 = "there is a lot you to do in the work and should still be"
     def main(args: Array[String]){
         val cs1 = s1.replace(" ","").map(item => item)

@@ -1,9 +1,10 @@
-package Intermediate;
+package Intermediate.GarageSimulation
 
 /**
   * Created by Administrator on 06/06/2017.
   */
-case class Car(id: Int, vehicleType: VehicleType.Value = VehicleType.CAR) extends Vehicle {
+case class Bike(id: Int, vehicleType: VehicleType.Value = VehicleType.BIKE) extends Vehicle {
+  // add parts when Object is initiated
   addParts()
 
   override def toString() = {
@@ -13,5 +14,4 @@ case class Car(id: Int, vehicleType: VehicleType.Value = VehicleType.CAR) extend
     }
     s"ID: $id \nType: $vehicleType \nParts: ($partsInfo)"
   }
-
 }

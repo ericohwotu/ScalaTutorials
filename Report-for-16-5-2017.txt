@@ -1,63 +1,81 @@
-There are currently 10 vehicles in the garage and 2 employees working today
+There are currently 13 vehicles in the garage and 7 employees working today
 
+Vehicle Record: 
+ID: 6 
+Type: CAR
+Assigned Employee: Eric Lockette
+Cost: £439.05
+Fix Time: 17 minutes
 Vehicle Record: 
 ID: 1 
 Type: CAR
 Assigned Employee: John Lavall
-Cost: £549.75
-Fix Time: 23 minutes
+Cost: £544.89
+Fix Time: 21 minutes
+Vehicle Record: 
+ID: 4 
+Type: CAR
+Assigned Employee: Julia Edwards
+Cost: £846.31
+Fix Time: 26 minutes
+Vehicle Record: 
+ID: 5 
+Type: CAR
+Assigned Employee: Juliet Adams
+Cost: £691.93
+Fix Time: 26 minutes
 Vehicle Record: 
 ID: 2 
 Type: CAR
 Assigned Employee: Jim Williams
-Cost: £865.44
-Fix Time: 34 minutes
-Vehicle Record: 
-ID: 3 
-Type: CAR
-Assigned Employee: John Lavall
-Cost: £443.45
-Fix Time: 13 minutes
-Vehicle Record: 
-ID: 5 
-Type: CAR
-Assigned Employee: John Lavall
-Cost: £221.09
-Fix Time: 10 minutes
-Vehicle Record: 
-ID: 4 
-Type: CAR
-Assigned Employee: Jim Williams
-Cost: £492.58
-Fix Time: 22 minutes
-Vehicle Record: 
-ID: 6 
-Type: BIKE
-Assigned Employee: John Lavall
-Cost: £555.31
-Fix Time: 22 minutes
+Cost: £746.00
+Fix Time: 28 minutes
 Vehicle Record: 
 ID: 7 
 Type: CAR
-Assigned Employee: Jim Williams
-Cost: £821.10
-Fix Time: 32 minutes
+Assigned Employee: John Johnson
+Cost: £597.55
+Fix Time: 33 minutes
 Vehicle Record: 
-ID: 8 
+ID: 3 
+Type: BIKE
+Assigned Employee: George Davis
+Cost: £742.99
+Fix Time: 36 minutes
+Vehicle Record: 
+ID: 9 
 Type: CAR
 Assigned Employee: John Lavall
-Cost: £592.25
-Fix Time: 23 minutes
+Cost: £601.95
+Fix Time: 17 minutes
+Vehicle Record: 
+ID: 12 
+Type: CAR
+Assigned Employee: Jim Williams
+Cost: £467.59
+Fix Time: 16 minutes
+Vehicle Record: 
+ID: 8 
+Type: BIKE
+Assigned Employee: Eric Lockette
+Cost: £876.97
+Fix Time: 32 minutes
 Vehicle Record: 
 ID: 10 
 Type: CAR
-Assigned Employee: John Lavall
-Cost: £539.32
-Fix Time: 21 minutes
+Assigned Employee: Julia Edwards
+Cost: £660.29
+Fix Time: 28 minutes
 Vehicle Record: 
-ID: 9 
+ID: 11 
+Type: CAR
+Assigned Employee: Juliet Adams
+Cost: £778.87
+Fix Time: 28 minutes
+Vehicle Record: 
+ID: 13 
 Type: BIKE
-Assigned Employee: Jim Williams
-Cost: £693.68
-Fix Time: 28 minutesTotal Earned: 5773.97 
+Assigned Employee: John Johnson
+Cost: £749.68
+Fix Time: 25 minutesTotal Earned: 8744.07 
 END
