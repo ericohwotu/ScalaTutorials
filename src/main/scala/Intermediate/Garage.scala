@@ -3,13 +3,12 @@ package Intermediate
 /**
   * Created by Administrator on 06/06/2017.
   */
+
 import java.util._
 
 import scala.concurrent._
 import java.util.concurrent.Executors
 import java.io.{BufferedWriter, File, FileWriter, PrintWriter}
-
-
 
 
 object Garage {
@@ -40,7 +39,7 @@ object Garage {
     val totalVehicles = vehicles.length
     val totalEmployees = employees.length
 
-    while(!vehicles.isEmpty || employeesWorking!=0){
+    while (!vehicles.isEmpty || employeesWorking != 0) {
       employees.isEmpty match {
         case false => {
           //select the first employee and remove them from the list
@@ -70,6 +69,7 @@ object Garage {
   def removeVehicle(id: Int): Unit = for (v <- vehicles) if (v.id == id) {
     vehicles -= v
   }
+
   def removeVehicle(vehicleType: VehicleType.Value): Unit = for (v <- vehicles) if (v.vehicleType == vehicleType) {
     vehicles -= v
   }
@@ -84,18 +84,18 @@ object Garage {
     val startMinute = now.get(Calendar.MINUTE)
     val startSecond = now.get(Calendar.SECOND)
 
-    println(startMinute + ":" + startSecond + " >>> " +employee.name + " is working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(startMinute + ":" + startSecond + " >>> " + employee.name + " is working on " + vehicle.vehicleType + " " + vehicle.id)
 
     //remove the vehicle from the vehicles list
     vehicles -= vehicles.head
-    
+
     //calculate the total time
     var totalTime = 0
     var totalCost = 0.0
-    var total =0
+    var total = 0
+
     for (part <- vehicle.parts) {
-      
-      part.broken match{
+      part.broken match {
         case _ if (part.broken) => {
           totalTime += part.fixTime //get the total time to complete the work
           totalCost += part.cost //get the total cost of the parts
@@ -108,9 +108,9 @@ object Garage {
         }
       }
     }
-    
+
     Thread.sleep(totalTime * 1000)
-  
+
     fixedVehicles += vehicle //add the fixed vehicles to the new list
     employees += employee
 
@@ -120,8 +120,8 @@ object Garage {
     val endMinute = end.get(Calendar.MINUTE)
     val endSecond = end.get(Calendar.SECOND)
 
-    println(endMinute + ":" + endSecond +" >>> " +employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
-    println(endMinute + ":" + endSecond +" >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f" )
+    println(endMinute + ":" + endSecond + " >>> " + employee.name + " has finished working on working on " + vehicle.vehicleType + " " + vehicle.id)
+    println(endMinute + ":" + endSecond + " >>> Total Elapsed Time = " + totalTime + f"minutes Total Cost = £${totalCost}%2.2f")
     printWriter.write(f"\nVehicle Record: \nID: ${vehicle.id} \nType: ${vehicle.vehicleType}\nAssigned Employee: ${employee.name}\nCost: £${totalCost}%2.2f\nFix Time: ${totalTime} minutes")
     csvWriter.write(f"\n${vehicle.id},${vehicle.vehicleType},$total,${employee.id},${employee.name},$totalTime s,$startHour:$startMinute:$startSecond,$endHour:$endMinute:$endSecond,£${totalCost}%2.2f")
   }
@@ -129,16 +129,15 @@ object Garage {
   //for(v <- vehicles)if(v.state == VehicleState.BROKEN)for(v.parts)
   def calculateBills(): Double = {
     var totalCost: Double = 0.0
-    for(v <- vehicles) {
+    for (v <- vehicles) {
       v.broken match {
-        case true => {
+        case true =>
           for (part <- v.parts) {
             part.broken match {
               case true => totalCost += part.cost
               case _ => totalCost += 0.0
             }
           }
-        }
         case _ => 0.0
       }
     }
@@ -147,12 +146,12 @@ object Garage {
   }
 
   def displayInventory(): String = {
-    println("Vehicle length "+ vehicles.size)
+    println("Vehicle length " + vehicles.size)
     var vehiclesInfo: String = ""
 
     for (v <- vehicles) {
       var vehicleCost: Double = 0
-      for (p <- v.parts)vehicleCost += p.cost
+      for (p <- v.parts) vehicleCost += p.cost
       vehiclesInfo += f"${v.toString()} Total Cost: ${vehicleCost}%2.2f \n"
     }
     s"Garage is $opened the vehicles added are listed below: \nVehicles: \n($vehiclesInfo)"

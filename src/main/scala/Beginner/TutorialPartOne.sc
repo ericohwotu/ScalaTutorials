@@ -28,7 +28,7 @@ def trimString(term: String, index: Int): String = term.substring(term.length()-
 val trimmedString = trimString("hello",3)
 
 //strings 2
-def joinString(a: String, b: String, c: Char, d: Char): String = a.concat(b).replace(c,d)
+def joinString(a: String, b: String, c: Char, d: Char): String = (a+b).replace(c,d)
 val jointString= joinString("hel", "lo ", 'm', 'e')
 
 //operators
@@ -42,25 +42,18 @@ val calculatedValueFalse = calculate(12,5,false)
 
 //conditionals 2
 def calculateThird(a: Int, b: Int, opt: Boolean): Int = {
-  if(a==0 && b==0){
-    0
-  }
-  else if(a==0){
-    b
-  }else if(b==0){
-    a
-  }else if(opt){
-    a+b
-  }else{
-    a*b
-  }
+  if(a==0 && b==0) 0
+  else if(a==0) b
+  else if(b==0) a
+  else if(opt) a+b
+  else a*b
 }
 val calculatedThirdTrue = calculate(12,0,true)
 val calculatedThirdFalse = calculate(0,0,false)
 
 //iteration
 def iterate(text: String, count: Int): Unit ={
-  for(i<-1 to count)println(text)
+  for(i<-1 to count) println(text)
 }
 iterate("hello",6)
 
@@ -71,36 +64,30 @@ iterate2("h",6)
 //iteration 3
 def fizzBuzz(first: String, second: String, count: Int): Unit = {
   for(i<-1 to count){
-    if(i % 3 == 0 && i % 5 == 0){
-      println(first.concat(second))
-    }else if(i % 5 == 0){
-      println(second)
-    }else if(i % 3 == 0){
-      println(first)
-    }else{
-      println(i)
-    }
+    if(i % 3 == 0 && i % 5 == 0) println(first+second)
+    else if(i % 5 == 0) println(second)
+    else if(i % 3 == 0) println(first)
+    else println(i)
   }
 }
 fizzBuzz("Hello", "Bye", 20)
 
 //iteration 4
 //method recursion 1
-def iterateRecursion(text: String, count: Int, cur: Int = 1): Unit ={
+def iterateRecursion(text: String, count: Int): Unit ={
   println(text)
-  var index = cur + 1
-  if (cur <= count) {
-    iterateRecursion(text, count, index)
+  if (count > 0) {
+    iterateRecursion(text, count-1)
   }
 }
-iterateRecursion("hello",6)
+iterateRecursion("hello",8)
 
 //method recursion 2
 def iterateRecursion2(text: String, count: Int, cur: Int = 1): Unit ={
   println(text*count)
-  var index = cur + 1
-  if (cur <= count) {
-    iterateRecursion2(text, count, index)
+
+  if (cur < count) {
+    iterateRecursion2(text, count, cur+1)
   }
 }
 iterateRecursion2("he",6)
@@ -155,22 +142,18 @@ val calculatedMatch4 = calculateMatch3(12,2,false)
 // pattern Matching 2
 def swapValues[T](arr: T) = {
   arr match {
-    case Array(x,y) => Array(y,x)
-    case arrItem: Array[Int] => Array(arrItem(1),arrItem(0))
+    case arrItem: Array[Int] => Array(arrItem(1),arrItem.head)
     case (x, y) => Tuple2(y,x)
     case (x, y,_) => Tuple2(y,x)
     case (x, y,_,_) => Tuple2(y,x)
     case (x, y,_,_,_) => Tuple2(y,x)
-    case List(x,y) => List(y,x)
-    case x :: y :: _ => List(y,x)
+    case arrItem: List[T] => List(arrItem(1),arrItem.head)
     case _ => "Not a valid type"
   }
 }
 
-
-swapValues(Array(3,6,8,9,3,5,3))
+swapValues(Array(6,8))
 swapValues((4,19))
 swapValues(List(2,5,7,8,93))
 swapValues((4,19,6))
 
-(1,2,3,4,5).getClass.isInstance((1,2,3,4,5).getClass)
