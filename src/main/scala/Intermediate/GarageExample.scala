@@ -27,7 +27,7 @@ object GarageExample {
     val firstNames = Array("Eric","John","Jim","George","Julia","Juliet")
     val lastNames = Array("Johnson","Lavall","Williams","Davis","Edwards","Adams","Lockette")
 
-    for(i<- 1 to (Math.random()*10).toInt)
+    for(i<- 1 to (Math.random()*10).toInt+1)
       Garage.addEmployee(new Employee(i,s"${firstNames(i % firstNames.length)} ${lastNames(i % lastNames.length)}"))
 
     Garage.open()
