@@ -8,7 +8,7 @@ object Advanced {
     val beginning = System.currentTimeMillis()
     println("Beginning prime number calculation")
 
-    val n = 10000000
+    val n = 100000000
 
 
     val primeNumbers = {3 to n by 2}.toBuffer.filter(item => {if(p.forall(item % _ != 0)){if(item < Math.sqrt(n)){p += item};true} else false }).size + 1
